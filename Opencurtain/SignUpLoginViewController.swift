@@ -1,5 +1,5 @@
 //
-//  SignUpWebmailViewController.swift
+//  SignUpLoginViewController.swift
 //  Opencurtain
 //
 //  Created by 김기현 on 2019/10/21.
@@ -8,10 +8,8 @@
 
 import UIKit
 
-class SignUpWebmailViewController: UIViewController {
-    @IBOutlet weak var nextButton: UIButton!
-    @IBOutlet var tapGesture: UITapGestureRecognizer!
-    
+class SignUpLoginViewController: UIViewController {
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -22,6 +20,7 @@ class SignUpWebmailViewController: UIViewController {
         self.view.endEditing(true)
     }
     
+
     /*
     // MARK: - Navigation
 

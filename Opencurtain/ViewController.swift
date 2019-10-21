@@ -9,13 +9,42 @@
 import UIKit
 
 class ViewController: UIViewController {
+
+    @IBOutlet weak var signUpButton: UIButton!
+    @IBOutlet weak var loginButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        signUpButton.layer.shadowColor = UIColor.black.cgColor
+        signUpButton.layer.shadowOpacity = 0.16
+        signUpButton.layer.shadowOffset = CGSize(width: 0, height: 2)
+        signUpButton.layer.shadowRadius = 5.0
+        signUpButton.layer.masksToBounds = false
+        signUpButton.layer.cornerRadius = 4.0
+        
+        loginButton.layer.shadowColor = UIColor.black.cgColor
+        loginButton.layer.shadowOpacity = 0.16
+        loginButton.layer.shadowOffset = CGSize(width: 0, height: 2)
+        loginButton.layer.shadowRadius = 5.0
+        loginButton.layer.masksToBounds = false
+        loginButton.layer.cornerRadius = 4.0
+        
+        
     }
     
+    @IBAction func signUpButtonClick(_ sender: Any) {
+        let viewController: UIViewController = self.storyboard!.instantiateViewController(withIdentifier: "signUp")
+        viewController.modalPresentationStyle = .overFullScreen
+        self.present(viewController, animated: true, completion: nil)
+    }
     
+    @IBAction func loginButtonClick(_ sender: Any) {
+        let viewController: UIViewController = self.storyboard!.instantiateViewController(identifier: "login")
+        viewController.modalPresentationStyle = .overFullScreen
+        self.present(viewController, animated: true, completion: nil)
+    }
     
 
 
