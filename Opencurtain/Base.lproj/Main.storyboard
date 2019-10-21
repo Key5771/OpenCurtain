@@ -63,7 +63,7 @@
             </objects>
             <point key="canvasLocation" x="139" y="93"/>
         </scene>
-        <!--Sign Up Webmail View Controller-->
+        <!--회원가입-->
         <scene sceneID="3z9-UC-LEY">
             <objects>
                 <viewController id="xH7-dK-OWa" customClass="SignUpWebmailViewController" customModule="Opencurtain" customModuleProvider="target" sceneMemberID="viewController">
@@ -111,7 +111,7 @@
                             <outletCollection property="gestureRecognizers" destination="F0n-Ac-4oz" appends="YES" id="x8j-ar-tXp"/>
                         </connections>
                     </view>
-                    <navigationItem key="navigationItem" id="onN-0f-4va"/>
+                    <navigationItem key="navigationItem" title="회원가입" id="onN-0f-4va"/>
                     <connections>
                         <outlet property="nextButton" destination="oPA-QS-RUM" id="wYP-CE-4Pe"/>
                         <outlet property="tapGesture" destination="F0n-Ac-4oz" id="J4i-lR-w7A"/>
@@ -217,7 +217,7 @@
             </objects>
             <point key="canvasLocation" x="1119" y="-260"/>
         </scene>
-        <!--Sign Up Auth View Controller-->
+        <!--인증번호-->
         <scene sceneID="2IU-62-tfg">
             <objects>
                 <viewController id="0mF-LG-NPx" customClass="SignUpAuthViewController" customModule="Opencurtain" customModuleProvider="target" sceneMemberID="viewController">
@@ -263,13 +263,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="o9F-io-vhp"/>
                     </view>
-                    <navigationItem key="navigationItem" id="YSf-0r-w1q"/>
+                    <navigationItem key="navigationItem" title="인증번호" id="YSf-0r-w1q"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IuP-pD-Bnn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2884" y="-260"/>
         </scene>
-        <!--Sign Up Login View Controller-->
+        <!--로그인-->
         <scene sceneID="zKU-mE-qaF">
             <objects>
                 <viewController id="koE-4g-WQH" customClass="SignUpLoginViewController" customModule="Opencurtain" customModuleProvider="target" sceneMemberID="viewController">
@@ -343,13 +343,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="bAC-c0-mG4"/>
                     </view>
-                    <navigationItem key="navigationItem" id="iE4-hC-btZ"/>
+                    <navigationItem key="navigationItem" title="로그인" id="iE4-hC-btZ"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="G7k-ha-CGr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3745" y="-260"/>
         </scene>
-        <!--View Controller-->
+        <!--회원가입 완료-->
         <scene sceneID="lCS-iW-cbR">
             <objects>
                 <viewController id="3HF-bE-nEZ" sceneMemberID="viewController">
@@ -381,7 +381,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="DIQ-v0-0v8"/>
                     </view>
-                    <navigationItem key="navigationItem" id="c2n-lI-3uD"/>
+                    <navigationItem key="navigationItem" title="회원가입 완료" id="c2n-lI-3uD"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hvY-ep-JaO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
