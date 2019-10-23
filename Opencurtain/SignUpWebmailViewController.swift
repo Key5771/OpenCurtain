@@ -16,6 +16,8 @@ class SignUpWebmailViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        nextButton.layer.cornerRadius = 5
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
