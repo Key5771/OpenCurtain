@@ -436,14 +436,73 @@
             </objects>
             <point key="canvasLocation" x="5668" y="183"/>
         </scene>
+        <!--Side Menu View Controller-->
+        <scene sceneID="0qV-xP-qZe">
+            <objects>
+                <viewController storyboardIdentifier="board" id="HWk-jP-iXV" customClass="SideMenuViewController" customModule="Opencurtain" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="0mF-UC-pFH">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="X5n-Z0-baL">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" red="1" green="0.87843137250000003" blue="0.82745098039999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="totalCell" id="5e0-8f-8tv" customClass="SideMenuTableViewCell" customModule="Opencurtain" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="59"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5e0-8f-8tv" id="2Bi-zz-9T4">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="59"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="전체글보기" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gox-EB-1ZV">
+                                                    <rect key="frame" x="36" y="19" width="342" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottomMargin" secondItem="gox-EB-1ZV" secondAttribute="bottom" constant="8" id="SWm-L0-Oig"/>
+                                                <constraint firstItem="gox-EB-1ZV" firstAttribute="leading" secondItem="2Bi-zz-9T4" secondAttribute="leadingMargin" constant="16" id="WaI-Q7-44C"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="gox-EB-1ZV" secondAttribute="trailing" constant="16" id="bks-Z4-sup"/>
+                                                <constraint firstItem="gox-EB-1ZV" firstAttribute="top" secondItem="2Bi-zz-9T4" secondAttribute="topMargin" constant="8" id="tqS-zJ-puo"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="1" green="0.87843137250000003" blue="0.82745098039999998" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <outlet property="totalLabel" destination="gox-EB-1ZV" id="nzx-AN-yT1"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="0.87843137250000003" blue="0.82745098039999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="oHb-s7-Rp4" firstAttribute="bottom" secondItem="X5n-Z0-baL" secondAttribute="bottom" id="EBh-JX-tPf"/>
+                            <constraint firstItem="X5n-Z0-baL" firstAttribute="leading" secondItem="oHb-s7-Rp4" secondAttribute="leading" id="Lc2-hl-Acq"/>
+                            <constraint firstItem="X5n-Z0-baL" firstAttribute="top" secondItem="oHb-s7-Rp4" secondAttribute="top" id="d6y-Tw-kcr"/>
+                            <constraint firstItem="oHb-s7-Rp4" firstAttribute="trailing" secondItem="X5n-Z0-baL" secondAttribute="trailing" id="sIo-48-4md"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="oHb-s7-Rp4"/>
+                    </view>
+                    <connections>
+                        <outlet property="menuTableView" destination="X5n-Z0-baL" id="LBw-qY-mDn"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CRY-WB-hbv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6875" y="-508"/>
+        </scene>
         <!--게시판-->
         <scene sceneID="C93-5c-4Hi">
             <objects>
-                <tableViewController storyboardIdentifier="board" id="QDS-fr-afO" customClass="SideMenuTableViewController" customModule="Opencurtain" customModuleProvider="target" sceneMemberID="viewController">
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3Px-i9-aRc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tableViewController id="QDS-fr-afO" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="HXz-og-A8r">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" red="1" green="0.87843137250000003" blue="0.82745098039999998" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="totalCell" id="Hun-FR-yoU">
                                 <rect key="frame" x="0.0" y="28" width="414" height="37.5"/>
@@ -466,6 +525,7 @@
                                         <constraint firstAttribute="bottom" secondItem="KhD-NA-vnO" secondAttribute="bottom" constant="8" id="fo7-Yw-fTE"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" red="1" green="0.87843137250000003" blue="0.82745098039999998" alpha="1" colorSpace="calibratedRGB"/>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="universityCell" id="337-Ly-RYV">
                                 <rect key="frame" x="0.0" y="65.5" width="414" height="37.5"/>
@@ -488,6 +548,7 @@
                                         <constraint firstAttribute="bottom" secondItem="fL9-Cd-o8d" secondAttribute="bottom" constant="8" id="dzH-Ks-s4d"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" red="1" green="0.87843137250000003" blue="0.82745098039999998" alpha="1" colorSpace="calibratedRGB"/>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="colleageCell" id="Zqa-8S-o3f">
                                 <rect key="frame" x="0.0" y="103" width="414" height="37.5"/>
@@ -510,6 +571,7 @@
                                         <constraint firstAttribute="trailing" secondItem="ISF-xz-bNS" secondAttribute="trailing" constant="16" id="k9v-4x-Fyp"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" red="1" green="0.87843137250000003" blue="0.82745098039999998" alpha="1" colorSpace="calibratedRGB"/>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="majorCell" id="fU7-Or-7XG">
                                 <rect key="frame" x="0.0" y="140.5" width="414" height="37.5"/>
@@ -532,6 +594,7 @@
                                         <constraint firstAttribute="trailing" secondItem="P1p-F8-mHD" secondAttribute="trailing" constant="16" id="xpv-tc-688"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" red="1" green="0.87843137250000003" blue="0.82745098039999998" alpha="1" colorSpace="calibratedRGB"/>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -541,7 +604,6 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="게시판" id="pkZ-ZM-kew"/>
                 </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="3Px-i9-aRc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="7519" y="-507"/>
         </scene>
@@ -593,7 +655,7 @@
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fOu-xG-u2b">
                                                     <rect key="frame" x="0.0" y="235" width="414" height="15"/>
-                                                    <color key="backgroundColor" systemColor="tertiarySystemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="backgroundColor" systemColor="tertiarySystemGroupedBackgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="15" id="BGs-SX-x2i"/>
                                                     </constraints>

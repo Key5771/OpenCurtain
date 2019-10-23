@@ -50,6 +50,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
 //        self.present(viewController, animated: true, completion: nil)
         let vc = self.storyboard!.instantiateViewController(withIdentifier: "board")
         let menu = SideMenuNavigationController(rootViewController: vc)
+        menu.presentationStyle = .menuSlideIn
         menu.leftSide = true
         menu.statusBarEndAlpha = 0
         menu.navigationBar.backgroundColor = UIColor(displayP3Red: 255/255, green: 244/255, blue: 211/255, alpha: 1)
