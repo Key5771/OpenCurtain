@@ -1,15 +1,15 @@
 //
-//  LoginViewController.swift
+//  SignupFinishViewController.swift
 //  Opencurtain
 //
-//  Created by 김기현 on 2019/10/22.
+//  Created by 김기현 on 2019/10/23.
 //  Copyright © 2019 김기현. All rights reserved.
 //
 
 import UIKit
 
-class LoginViewController: UIViewController {
-    @IBOutlet weak var loginButton: UIButton!
+class SignupFinishViewController: UIViewController {
+    @IBOutlet weak var continueButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,8 +17,8 @@ class LoginViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    @IBAction func loginButtonClick(_ sender: Any) {
-        let vc: UIViewController = self.storyboard!.instantiateViewController(withIdentifier: "listView")
+    @IBAction func continueButtonClick(_ sender: Any) {
+        let vc: UIViewController = self.storyboard!.instantiateViewController(withIdentifier: "loginView")
         vc.modalPresentationStyle = .overFullScreen
         self.present(vc, animated: true, completion: nil)
     }

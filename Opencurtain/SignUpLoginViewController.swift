@@ -10,6 +10,12 @@ import UIKit
 
 class SignUpLoginViewController: UIViewController {
     @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak var emailLabel: UILabel!
+    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var idLabel: UILabel!
+    @IBOutlet weak var idTextField: UITextField!
+    @IBOutlet weak var passwordLabel: UILabel!
+    @IBOutlet weak var passwordTextField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,8 +23,10 @@ class SignUpLoginViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         nextButton.layer.cornerRadius = 5
+        
     }
     
+
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
