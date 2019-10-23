@@ -400,21 +400,150 @@
             </objects>
             <point key="canvasLocation" x="4625" y="-260"/>
         </scene>
-        <!--List View Controller-->
-        <scene sceneID="Xk5-YF-h19">
+        <!--Navigation Controller-->
+        <scene sceneID="CZe-uo-B1O">
             <objects>
-                <viewController storyboardIdentifier="contentView" useStoryboardIdentifierAsRestorationIdentifier="YES" id="NjP-QQ-gUS" customClass="ListViewController" customModule="Opencurtain" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="shL-MQ-bxG">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                <navigationController storyboardIdentifier="listView" id="8J6-ui-hUn" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="ZjI-el-GKi"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="bUx-iI-dd9">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="1" green="0.87843137250000003" blue="0.82745098039999998" alpha="1" colorSpace="calibratedRGB"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Qzp-07-3R9" kind="relationship" relationship="rootViewController" id="IuL-C2-gNz"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zcq-RE-wet" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5668" y="183"/>
+        </scene>
+        <!--게시판-->
+        <scene sceneID="C93-5c-4Hi">
+            <objects>
+                <tableViewController id="QDS-fr-afO" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="HXz-og-A8r">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="KuF-ne-n5U"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="gRF-gN-7kx"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="jSR-HZ-6ML" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Hun-FR-yoU">
+                                <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Hun-FR-yoU" id="8UC-nB-Y0u">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="QDS-fr-afO" id="wkc-lR-Pz2"/>
+                            <outlet property="delegate" destination="QDS-fr-afO" id="rF7-KT-8of"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="게시판" id="pkZ-ZM-kew"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3Px-i9-aRc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6206" y="183"/>
+            <point key="canvasLocation" x="7519" y="-507"/>
+        </scene>
+        <!--Side Menu Navigation Controller-->
+        <scene sceneID="DyJ-k4-HCv">
+            <objects>
+                <navigationController id="WhL-R5-J5d" customClass="SideMenuNavigationController" customModule="SideMenu" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="uFa-bo-ug9">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="1" green="0.87843137250000003" blue="0.82745098039999998" alpha="1" colorSpace="calibratedRGB"/>
+                    </navigationBar>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="leftSide" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <segue destination="QDS-fr-afO" kind="relationship" relationship="rootViewController" id="sYv-iI-mJB"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ehd-rw-Rru" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6600" y="-507"/>
+        </scene>
+        <!--전체 글 보기-->
+        <scene sceneID="373-le-Zqs">
+            <objects>
+                <viewController id="Qzp-07-3R9" customClass="ListViewController" customModule="Opencurtain" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="HF4-Mv-nCO">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="MTV-xU-wh6">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="250" id="fGP-cG-IHb">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="250"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="fGP-cG-IHb" id="bYg-J6-VMX">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="250"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="제주대학교" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rzz-IJ-nUH">
+                                                    <rect key="frame" x="34" y="11" width="74" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="익명" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j8s-Ta-zTa">
+                                                    <rect key="frame" x="79" y="40" width="30" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="2019.10.23" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u5U-La-3XG">
+                                                    <rect key="frame" x="79" y="69" width="84" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="금융권 준비하시는 분 계신가요? 이번에 졸업해서 준비를 하려는데 여러모로 걱정이 많네요 ㅠㅠ ncs 준비는 어떻게 하시는지, 그 외 다른 부분은 어떤거 준…" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dVY-KW-pow">
+                                                    <rect key="frame" x="32" y="98" width="350" height="61"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="dVY-KW-pow" secondAttribute="trailing" constant="32" id="JwE-nc-Y5u"/>
+                                                <constraint firstItem="dVY-KW-pow" firstAttribute="top" secondItem="u5U-La-3XG" secondAttribute="bottom" constant="8" id="NHK-Tg-jhg"/>
+                                                <constraint firstItem="dVY-KW-pow" firstAttribute="leading" secondItem="bYg-J6-VMX" secondAttribute="leading" constant="32" id="UnP-pL-5Em"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="dVY-KW-pow" secondAttribute="bottom" constant="80" id="XHn-F7-IFH"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="MTV-xU-wh6" firstAttribute="top" secondItem="21n-9b-LW9" secondAttribute="top" id="3xW-SB-hS9"/>
+                            <constraint firstItem="MTV-xU-wh6" firstAttribute="leading" secondItem="21n-9b-LW9" secondAttribute="leading" id="5DM-6O-edf"/>
+                            <constraint firstItem="21n-9b-LW9" firstAttribute="bottom" secondItem="MTV-xU-wh6" secondAttribute="bottom" id="7Xg-mt-07j"/>
+                            <constraint firstItem="21n-9b-LW9" firstAttribute="trailing" secondItem="MTV-xU-wh6" secondAttribute="trailing" id="wAW-P5-nNj"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="21n-9b-LW9"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="전체 글 보기" id="ixQ-pv-33F">
+                        <barButtonItem key="leftBarButtonItem" title="Item" id="W1s-YA-9Rz">
+                            <connections>
+                                <segue destination="WhL-R5-J5d" kind="presentation" id="FBB-sj-xYI"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="drv-6h-d2H" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6601" y="183"/>
         </scene>
     </scenes>
     <resources>
