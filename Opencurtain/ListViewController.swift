@@ -8,22 +8,27 @@
 
 import UIKit
 import SideMenu
+import Alamofire
 
 class ListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var sideButton: UIBarButtonItem!
     @IBOutlet weak var listTableView: UITableView!
     
-    var university: [String] = ["제주대학교", "제주한라대학교", "제주관광대학교"]
-    var name: [String] = ["익명", "익명", "익명"]
-    var timestamp: [String] = ["2019년 10월 22일", "2019년 10월 23일", "2019년 10월 23일"]
-    var content: [String] = ["금융권 준비하시는 분 계신가요? 이번에 졸업해서 준비를 하려는데 여러모로 걱정이 많네요 ㅠㅠ ncs 준비는 어떻게 하시는지, 그 외 다른 부분은 어떤거 준…", "얼른 방학했으면 좋겠어요 탈구실 좀......", "연습연습연습연습연습연습연습연습연습연습연습연습연습연습연습연습연습연습연습연습연습연습연습"]
+    var university: [String] = ["제주대학교", "제주한라대학교"]
+    var name: [String] = ["익명", "익명"]
+    var timestamp: [String] = ["2019년 10월 22일", "2019년 10월 23일"]
+    var content: [String] = ["금융권 준비하시는 분 계신가요? 이번에 졸업해서 준비를 하려는데 여러모로 걱정이 많네요 ㅠㅠ ncs 준비는 어떻게 하시는지, 그 외 다른 부분은 어떤거 준…", "얼른 방학했으면 좋겠어요 탈구실 좀......"]
+    
+    var posts: [Post] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         listTableView.delegate = self
         listTableView.dataSource = self
+        
+        
         // Do any additional setup after loading the view.
     }
     
