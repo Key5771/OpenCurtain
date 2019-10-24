@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Alamofire
+import ObjectMapper
 
 class NetworkRequest {
     let baseURL = "http://opencurtain.run.goorm.io"
@@ -30,11 +30,21 @@ class NetworkRequest {
 //    }
 }
 
-class Users {
+class Users: Mappable {
     var count: Int = 0
     var next: Int = 0
     var previous: Int = 0
     var results: [User] = []
+    
+    required init?(map: Map) {
+        
+    }
+    
+    func mapping(map: Map) {
+        count <- map["count"]
+        next <- map["next"]
+        previous <- map["previous"]
+    }
 }
 
 class User {
@@ -46,11 +56,22 @@ class User {
     var department: Int = 0
 }
 
-class Subcribes {
+class Subcribes: Mappable {
     var count: Int = 0
     var next: Int = 0
     var previous: Int = 0
     var results: [Subcribe] = []
+    
+    required init?(map: Map) {
+        
+    }
+    
+    func mapping(map: Map) {
+        count <- map["count"]
+        next <- map["next"]
+        previous <- map["previous"]
+        results <- map["results"]
+    }
 }
 
 class Subcribe {
@@ -59,11 +80,22 @@ class Subcribe {
     var board: Int = 0
 }
 
-class Boards {
+class Boards: Mappable {
     var count: Int = 0
     var next: Int = 0
     var previous: Int = 0
     var results: [Board] = []
+    
+    required init?(map: Map) {
+        
+    }
+    
+    func mapping(map: Map) {
+        count <- map["count"]
+        next <- map["next"]
+        previous <- map["previous"]
+        results <- map["results"]
+    }
 }
 
 class Board {
@@ -72,11 +104,22 @@ class Board {
     var boardname: String = ""
 }
 
-class Universitys {
+class Universitys: Mappable {
     var count: Int = 0
     var next: Int = 0
     var previous: Int = 0
     var results: [University] = []
+    
+    required init?(map: Map) {
+        
+    }
+    
+    func mapping(map: Map) {
+        count <- map["count"]
+        next <- map["next"]
+        previous <- map["previous"]
+        results <- map["results"]
+    }
 }
 
 class University {
@@ -85,11 +128,22 @@ class University {
     var board: Int = 0
 }
 
-class Facultys {
+class Facultys: Mappable {
     var count: Int = 0
     var next: Int = 0
     var previous: Int = 0
     var results: [Faculty] = []
+    
+    required init?(map: Map) {
+        
+    }
+    
+    func mapping(map: Map) {
+        count <- map["count"]
+        next <- map["next"]
+        previous <- map["previous"]
+        results <- map["results"]
+    }
 }
 
 class Faculty {
@@ -99,11 +153,22 @@ class Faculty {
     var board: Int = 0
 }
 
-class Departments{
+class Departments: Mappable {
     var count: Int = 0
     var next: Int = 0
     var previous: Int = 0
     var results: [Department] = []
+    
+    required init?(map: Map) {
+        
+    }
+    
+    func mapping(map: Map) {
+        count <- map["count"]
+        next <- map["next"]
+        previous <- map["previous"]
+        results <- map["results"]
+    }
 }
 
 class Department {
@@ -114,11 +179,22 @@ class Department {
     var board: Int = 0
 }
 
-class Posts {
+class Posts: Mappable {
     var count: Int = 0
     var next: Int = 0
     var previous: Int = 0
     var results: [Post] = []
+    
+    required init?(map: Map) {
+        
+    }
+    
+    func mapping(map: Map) {
+        count <- map["count"]
+        next <- map["next"]
+        previous <- map["previous"]
+        results <- map["results"]
+    }
 }
 
 class Post {
@@ -130,10 +206,21 @@ class Post {
     var content: String = ""
 }
 
-class Comments {
+class Comments: Mappable {
     var count: Int = 0
     var next: Int = 0
     var previous: Int = 0
-//    var results = [String] = []
+//    var results = [String] = [""]
+    
+    required init?(map: Map) {
+        
+    }
+    
+    func mapping(map: Map) {
+        count <- map["count"]
+        next <- map["next"]
+        previous <- map["previous"]
+//        results <- map["results"]
+    }
 }
 
