@@ -16,10 +16,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Circle" translatesAutoresizingMaskIntoConstraints="NO" id="1cO-Wf-Goj">
-                                <rect key="frame" x="7" y="144" width="400" height="400"/>
+                                <rect key="frame" x="107" y="144" width="200" height="200"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PyX-yQ-hrJ">
-                                <rect key="frame" x="64" y="744" width="286" height="36"/>
+                                <rect key="frame" x="64" y="544" width="286" height="36"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="회원가입하기">
@@ -30,7 +30,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wzR-DL-DWt">
-                                <rect key="frame" x="64" y="812" width="286" height="36"/>
+                                <rect key="frame" x="64" y="612" width="286" height="36"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="기존 사용자로 로그인">
@@ -88,7 +88,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="대학교 이메일" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EUM-AY-BNL">
-                                <rect key="frame" x="48" y="391" width="108.5" height="24"/>
+                                <rect key="frame" x="32" y="391" width="124.5" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -101,7 +101,8 @@
                             <constraint firstItem="7Fu-BC-vpj" firstAttribute="trailing" secondItem="EUM-AY-BNL" secondAttribute="trailing" constant="257.5" id="35H-Ow-wWS"/>
                             <constraint firstItem="pCS-RF-CZQ" firstAttribute="leading" secondItem="7Fu-BC-vpj" secondAttribute="leading" constant="32" id="8rf-Y0-iz9"/>
                             <constraint firstItem="oPA-QS-RUM" firstAttribute="top" secondItem="pCS-RF-CZQ" secondAttribute="bottom" constant="16" id="L8Y-5v-i9h"/>
-                            <constraint firstItem="EUM-AY-BNL" firstAttribute="leading" secondItem="7Fu-BC-vpj" secondAttribute="leading" constant="48" id="LK2-4f-0sL"/>
+                            <constraint firstItem="EUM-AY-BNL" firstAttribute="leading" secondItem="7Fu-BC-vpj" secondAttribute="leading" constant="32" id="LK2-4f-0sL"/>
+                            <constraint firstItem="EUM-AY-BNL" firstAttribute="top" secondItem="7Fu-BC-vpj" secondAttribute="top" constant="303" id="UoX-Nk-klu"/>
                             <constraint firstItem="7Fu-BC-vpj" firstAttribute="trailing" secondItem="oPA-QS-RUM" secondAttribute="trailing" constant="32" id="VzG-cH-BtL"/>
                             <constraint firstItem="pCS-RF-CZQ" firstAttribute="top" secondItem="EUM-AY-BNL" secondAttribute="bottom" constant="16" id="YlM-hv-hpn"/>
                             <constraint firstItem="oPA-QS-RUM" firstAttribute="leading" secondItem="7Fu-BC-vpj" secondAttribute="leading" constant="334" id="Zi8-Qm-0XM"/>
@@ -257,7 +258,7 @@
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <segue destination="koE-4g-WQH" kind="show" id="eBC-4Z-H8e"/>
+                                    <segue destination="koE-4g-WQH" kind="show" id="38h-e7-Vnv"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -280,6 +281,129 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IuP-pD-Bnn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2884" y="-260"/>
+        </scene>
+        <!--Select University View Controller-->
+        <scene sceneID="hlw-2N-wyh">
+            <objects>
+                <viewController id="gda-iJ-jfq" customClass="SelectUniversityViewController" customModule="Opencurtain" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Wpk-jJ-XtS">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yWt-EJ-qkY">
+                                <rect key="frame" x="334" y="800" width="48" height="30"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title=" 다음 &gt; ">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                </state>
+                                <connections>
+                                    <segue destination="6y8-2u-Gax" kind="show" id="cwd-MJ-yE1"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="대학교" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="beg-hm-unH">
+                                <rect key="frame" x="32" y="391" width="52" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JqL-LU-qDB">
+                                <rect key="frame" x="32" y="431" width="350" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="0.87843137250000003" blue="0.82745098039999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="beq-CG-EOY" firstAttribute="trailing" secondItem="JqL-LU-qDB" secondAttribute="trailing" constant="32" id="BtL-ym-g7Q"/>
+                            <constraint firstItem="beg-hm-unH" firstAttribute="top" secondItem="beq-CG-EOY" secondAttribute="top" constant="303" id="Fng-Ix-v0w"/>
+                            <constraint firstItem="yWt-EJ-qkY" firstAttribute="leading" secondItem="beq-CG-EOY" secondAttribute="leading" constant="334" id="aQb-jg-Aaw"/>
+                            <constraint firstItem="JqL-LU-qDB" firstAttribute="top" secondItem="beg-hm-unH" secondAttribute="bottom" constant="16" id="djz-Nd-J7Y"/>
+                            <constraint firstItem="JqL-LU-qDB" firstAttribute="leading" secondItem="beq-CG-EOY" secondAttribute="leading" constant="32" id="mSk-PU-vQ5"/>
+                            <constraint firstItem="beq-CG-EOY" firstAttribute="bottom" secondItem="yWt-EJ-qkY" secondAttribute="bottom" constant="32" id="rus-xU-mby"/>
+                            <constraint firstItem="beq-CG-EOY" firstAttribute="trailing" secondItem="yWt-EJ-qkY" secondAttribute="trailing" constant="32" id="vqN-47-SIv"/>
+                            <constraint firstItem="beg-hm-unH" firstAttribute="leading" secondItem="beq-CG-EOY" secondAttribute="leading" constant="32" id="y9G-CQ-EmQ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="beq-CG-EOY"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="dPG-SM-8bA"/>
+                    <connections>
+                        <outlet property="nextButton" destination="yWt-EJ-qkY" id="icp-C4-5wg"/>
+                        <outlet property="universityTextfield" destination="JqL-LU-qDB" id="bbJ-LD-Q9S"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Cy0-kN-uBe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4675" y="-260"/>
+        </scene>
+        <!--Select Colleage View Controller-->
+        <scene sceneID="bIi-Lu-HsR">
+            <objects>
+                <viewController id="6y8-2u-Gax" customClass="SelectColleageViewController" customModule="Opencurtain" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="OpX-qX-0TW">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mgp-Ay-dXA">
+                                <rect key="frame" x="32" y="800" width="350" height="30"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="계속하기">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                </state>
+                                <connections>
+                                    <segue destination="3HF-bE-nEZ" kind="show" id="KqK-GV-LvU"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="단과대학" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mHz-f4-ka7">
+                                <rect key="frame" x="32" y="338" width="70" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ayB-fU-z8U">
+                                <rect key="frame" x="32" y="378" width="350" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="학과" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="58j-oX-Civ">
+                                <rect key="frame" x="32" y="444" width="35" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Pos-ij-EfF">
+                                <rect key="frame" x="32" y="484" width="350" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="0.87843137250000003" blue="0.82745098039999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="58j-oX-Civ" firstAttribute="top" secondItem="ayB-fU-z8U" secondAttribute="bottom" constant="32" id="3MM-WY-VmB"/>
+                            <constraint firstItem="mHz-f4-ka7" firstAttribute="leading" secondItem="01b-jh-tn4" secondAttribute="leading" constant="32" id="55v-Wh-LQT"/>
+                            <constraint firstItem="01b-jh-tn4" firstAttribute="trailing" secondItem="ayB-fU-z8U" secondAttribute="trailing" constant="32" id="FYK-Qy-sAY"/>
+                            <constraint firstItem="58j-oX-Civ" firstAttribute="leading" secondItem="01b-jh-tn4" secondAttribute="leading" constant="32" id="KCJ-Ua-pOV"/>
+                            <constraint firstItem="ayB-fU-z8U" firstAttribute="top" secondItem="mHz-f4-ka7" secondAttribute="bottom" constant="16" id="PZW-hQ-fyt"/>
+                            <constraint firstItem="01b-jh-tn4" firstAttribute="trailing" secondItem="mgp-Ay-dXA" secondAttribute="trailing" constant="32" id="Usl-z8-j9O"/>
+                            <constraint firstItem="Pos-ij-EfF" firstAttribute="top" secondItem="58j-oX-Civ" secondAttribute="bottom" constant="16" id="i5e-l3-ak7"/>
+                            <constraint firstItem="mHz-f4-ka7" firstAttribute="top" secondItem="01b-jh-tn4" secondAttribute="top" constant="250" id="kUh-FQ-jfs"/>
+                            <constraint firstItem="Pos-ij-EfF" firstAttribute="leading" secondItem="01b-jh-tn4" secondAttribute="leading" constant="32" id="nwO-1q-eKf"/>
+                            <constraint firstItem="01b-jh-tn4" firstAttribute="bottom" secondItem="mgp-Ay-dXA" secondAttribute="bottom" constant="32" id="pkT-9R-gBD"/>
+                            <constraint firstItem="ayB-fU-z8U" firstAttribute="leading" secondItem="01b-jh-tn4" secondAttribute="leading" constant="32" id="qj8-f6-ehQ"/>
+                            <constraint firstItem="01b-jh-tn4" firstAttribute="trailing" secondItem="Pos-ij-EfF" secondAttribute="trailing" constant="32" id="vWo-Mp-OQ0"/>
+                            <constraint firstItem="mgp-Ay-dXA" firstAttribute="leading" secondItem="01b-jh-tn4" secondAttribute="leading" constant="32" id="x3J-4B-WJw"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="01b-jh-tn4"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="5Vg-xJ-Deb"/>
+                    <connections>
+                        <outlet property="colleageTextfield" destination="ayB-fU-z8U" id="fcc-TJ-b2D"/>
+                        <outlet property="majorTextfield" destination="Pos-ij-EfF" id="75L-LY-uoC"/>
+                        <outlet property="nextButton" destination="mgp-Ay-dXA" id="QKr-JT-5IH"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BP1-53-8M9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5570" y="-260"/>
         </scene>
         <!--회원정보-->
         <scene sceneID="zKU-mE-qaF">
@@ -326,10 +450,10 @@
                                 <rect key="frame" x="334" y="800" width="48" height="30"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title=" 다음 &gt; ">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
                                 <connections>
-                                    <segue destination="3HF-bE-nEZ" kind="show" id="hIv-JZ-Jdn"/>
+                                    <segue destination="gda-iJ-jfq" kind="show" id="77m-Yf-HDc"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -372,7 +496,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="G7k-ha-CGr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3745" y="-260"/>
+            <point key="canvasLocation" x="3778" y="-260"/>
         </scene>
         <!--회원가입 완료-->
         <scene sceneID="lCS-iW-cbR">
@@ -416,7 +540,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hvY-ep-JaO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4625" y="-260"/>
+            <point key="canvasLocation" x="6436" y="-260"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="CZe-uo-B1O">
@@ -434,7 +558,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zcq-RE-wet" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5668" y="183"/>
+            <point key="canvasLocation" x="7536" y="438"/>
         </scene>
         <!--Side Menu Navigation Controller-->
         <scene sceneID="CzC-R6-TUR">
@@ -451,7 +575,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8JK-VI-tet" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6093" y="-508"/>
+            <point key="canvasLocation" x="7962" y="-253"/>
         </scene>
         <!--Side Menu View Controller-->
         <scene sceneID="0qV-xP-qZe">
@@ -531,12 +655,11 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CRY-WB-hbv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6873.913043478261" y="-508.25892857142856"/>
+            <point key="canvasLocation" x="8743" y="-253"/>
         </scene>
         <!--게시판-->
         <scene sceneID="C93-5c-4Hi">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="3Px-i9-aRc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <tableViewController id="QDS-fr-afO" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="HXz-og-A8r">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -544,14 +667,14 @@
                         <color key="backgroundColor" red="1" green="0.87843137250000003" blue="0.82745098039999998" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="totalCell" id="Hun-FR-yoU">
-                                <rect key="frame" x="0.0" y="28" width="414" height="37.5"/>
+                                <rect key="frame" x="0.0" y="28" width="414" height="37"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Hun-FR-yoU" id="8UC-nB-Y0u">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="37.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="37"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="전체글보기" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KhD-NA-vnO">
-                                            <rect key="frame" x="16" y="8" width="382" height="21.5"/>
+                                            <rect key="frame" x="16" y="8" width="382" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -567,14 +690,14 @@
                                 <color key="backgroundColor" red="1" green="0.87843137250000003" blue="0.82745098039999998" alpha="1" colorSpace="calibratedRGB"/>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="universityCell" id="337-Ly-RYV">
-                                <rect key="frame" x="0.0" y="65.5" width="414" height="37.5"/>
+                                <rect key="frame" x="0.0" y="65" width="414" height="37"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="337-Ly-RYV" id="xCy-gi-AaM">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="37.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="37"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="제주대학교" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fL9-Cd-o8d">
-                                            <rect key="frame" x="16" y="8" width="382" height="21.5"/>
+                                            <rect key="frame" x="16" y="8" width="382" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -590,14 +713,14 @@
                                 <color key="backgroundColor" red="1" green="0.87843137250000003" blue="0.82745098039999998" alpha="1" colorSpace="calibratedRGB"/>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="colleageCell" id="Zqa-8S-o3f">
-                                <rect key="frame" x="0.0" y="103" width="414" height="37.5"/>
+                                <rect key="frame" x="0.0" y="102" width="414" height="37"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Zqa-8S-o3f" id="xyx-93-O08">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="37.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="37"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="공과대학" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ISF-xz-bNS">
-                                            <rect key="frame" x="16" y="8" width="382" height="21.5"/>
+                                            <rect key="frame" x="16" y="8" width="382" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -613,14 +736,14 @@
                                 <color key="backgroundColor" red="1" green="0.87843137250000003" blue="0.82745098039999998" alpha="1" colorSpace="calibratedRGB"/>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="majorCell" id="fU7-Or-7XG">
-                                <rect key="frame" x="0.0" y="140.5" width="414" height="37.5"/>
+                                <rect key="frame" x="0.0" y="139" width="414" height="37"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="fU7-Or-7XG" id="5e0-Yn-4Me">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="37.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="37"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="컴공" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P1p-F8-mHD">
-                                            <rect key="frame" x="16" y="8" width="382" height="21.5"/>
+                                            <rect key="frame" x="16" y="8" width="382" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -643,8 +766,9 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="게시판" id="pkZ-ZM-kew"/>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3Px-i9-aRc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7519" y="-507"/>
+            <point key="canvasLocation" x="9388" y="-252"/>
         </scene>
         <!--전체 글 보기-->
         <scene sceneID="373-le-Zqs">
@@ -748,7 +872,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="drv-6h-d2H" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6600.0000000000009" y="182.8125"/>
+            <point key="canvasLocation" x="8470" y="438"/>
         </scene>
     </scenes>
     <resources>
