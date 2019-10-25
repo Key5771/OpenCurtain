@@ -15,6 +15,8 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var sideButton: UIBarButtonItem!
     @IBOutlet weak var listTableView: UITableView!
     
+    var api = NetworkRequest()
+    
     var university: [String] = ["제주대학교", "제주한라대학교"]
     var name: [String] = ["익명", "익명"]
     var timestamp: [String] = ["2019년 10월 22일", "2019년 10월 23일"]
@@ -25,11 +27,10 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Do any additional setup after loading the view.
+        
         listTableView.delegate = self
         listTableView.dataSource = self
-        
-        
-        // Do any additional setup after loading the view.
     }
     
     

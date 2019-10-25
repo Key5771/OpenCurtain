@@ -8,6 +8,8 @@
 
 import Foundation
 import ObjectMapper
+import AlamofireObjectMapper
+import Alamofire
 
 class NetworkRequest {
     let baseURL = "http://opencurtain.run.goorm.io"
@@ -24,10 +26,12 @@ class NetworkRequest {
     }
     
 //    func request(api: API, method: Alamofire.HTTPMethod, completion handler: @escaping (DefaultDataResponse) -> Void) {
-//        Alamofire.request(baseURL+api.rawValue, method: method).response { response in
+//        (Alamofire.request(baseURL+api.rawValue, method: method) as AnyObject).response { response in
 //            response.result.value
 //        }
 //    }
+    
+    
 }
 
 class Users: Mappable {
