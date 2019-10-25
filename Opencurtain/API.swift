@@ -25,6 +25,8 @@ class NetworkRequest {
         case comments = "/comments"
     }
     
+    
+    
 //    func request(api: API, method: Alamofire.HTTPMethod, completion handler: @escaping (DefaultDataResponse) -> Void) {
 //        (Alamofire.request(baseURL+api.rawValue, method: method) as AnyObject).response { response in
 //            response.result.value

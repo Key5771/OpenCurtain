@@ -26,6 +26,7 @@
 		EAC4CB6D2361DCFE0042801B /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC4CB6C2361DCFE0042801B /* API.swift */; };
 		EAC4CB6F2362FFD00042801B /* SelectUniversityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC4CB6E2362FFD00042801B /* SelectUniversityViewController.swift */; };
 		EAC4CB73236300040042801B /* SelectColleageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC4CB72236300040042801B /* SelectColleageViewController.swift */; };
+		EAC4CB752363212D0042801B /* AddContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC4CB742363212D0042801B /* AddContentViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,7 @@
 		EAC4CB6C2361DCFE0042801B /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		EAC4CB6E2362FFD00042801B /* SelectUniversityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectUniversityViewController.swift; sourceTree = "<group>"; };
 		EAC4CB72236300040042801B /* SelectColleageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectColleageViewController.swift; sourceTree = "<group>"; };
+		EAC4CB742363212D0042801B /* AddContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddContentViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +125,7 @@
 				EAC4CB6C2361DCFE0042801B /* API.swift */,
 				EAC4CB6E2362FFD00042801B /* SelectUniversityViewController.swift */,
 				EAC4CB72236300040042801B /* SelectColleageViewController.swift */,
+				EAC4CB742363212D0042801B /* AddContentViewController.swift */,
 			);
 			path = Opencurtain;
 			sourceTree = "<group>";
@@ -254,6 +257,7 @@
 				EA5E0BE1235D35DF0098FC82 /* SceneDelegate.swift in Sources */,
 				EAC4CB73236300040042801B /* SelectColleageViewController.swift in Sources */,
 				EAC4CB6D2361DCFE0042801B /* API.swift in Sources */,
+				EAC4CB752363212D0042801B /* AddContentViewController.swift in Sources */,
 				EA9A7115235FD1A400701244 /* ListViewController.swift in Sources */,
 				EAC4CB6F2362FFD00042801B /* SelectUniversityViewController.swift in Sources */,
 				EA5E0BF5235D5C1F0098FC82 /* SignUpWebmailViewController.swift in Sources */,
