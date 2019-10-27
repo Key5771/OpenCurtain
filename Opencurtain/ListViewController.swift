@@ -25,6 +25,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     var content: [String] = ["금융권 준비하시는 분 계신가요? 이번에 졸업해서 준비를 하려는데 여러모로 걱정이 많네요 ㅠㅠ ncs 준비는 어떻게 하시는지, 그 외 다른 부분은 어떤거 준…", "얼른 방학했으면 좋겠어요 탈구실 좀......"]
     
     var posts: [Posts] = []
+    var post: [Post] = []
     
     
     override func viewDidLoad() {
@@ -35,14 +36,40 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         listTableView.delegate = self
         listTableView.dataSource = self
         
-        Alamofire.request(baseURL+"/posts", method: .get, parameters: [:], encoding: URLEncoding.default).responseArray { (response: DataResponse<[Posts]>) in
-            if let newPosts = response.result.value {
-                self.posts = newPosts
-                print("newPosts 배열 : \(newPosts)")
-                self.listTableView.reloadData()
+//        Alamofire.request(baseURL+"/posts").validate().responseJSON { response in
+//            print(response.result.value)
+//        }
+        
+        Alamofire.request(baseURL+"/posts").responseObject { (response: DataResponse<Posts>) in
+            let newPosts = response.result.value
+            if let results = newPosts?.results {
+                for a in results {
+                    print(a.title)
+                    print(a.id)
+                }
+                print(self.post)
             }
         }
-        print("posts 배열 : \(posts)")
+        
+//        Alamofire.request(baseURL+"/posts").validate().responseJSON { (response: DataResponse<Any>) in
+//            let newPosts = response.result.value
+//            self.posts.append(newPosts as! Posts)
+//            print(self.posts)
+//        }
+        
+//        Alamofire.request(baseURL+"/posts").validate().responseArray { (response: DataResponse<[Posts]>) in
+//            let newPosts = response.result.value
+//            print(newPosts)
+//        }
+        
+//        Alamofire.request(baseURL+"/posts", method: .get, parameters: [:], encoding: URLEncoding.default).responseArray { (response: DataResponse<[Posts]>) in
+//            if let newPosts = response.result.value {
+//                self.posts = newPosts
+//                print("newPosts 배열 : \(newPosts)")
+//                self.listTableView.reloadData()
+//            }
+//        }
+//        print("posts 배열 : \(posts)")
     }
     
     

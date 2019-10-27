@@ -16,6 +16,7 @@
 		EA5E0BEB235D35E10098FC82 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA5E0BE9235D35E10098FC82 /* LaunchScreen.storyboard */; };
 		EA5E0BF3235D5B640098FC82 /* SignUpAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5E0BF2235D5B640098FC82 /* SignUpAuthViewController.swift */; };
 		EA5E0BF5235D5C1F0098FC82 /* SignUpWebmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5E0BF4235D5C1F0098FC82 /* SignUpWebmailViewController.swift */; };
+		EA65F14B236560A600CA194C /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA65F14A236560A600CA194C /* SearchViewController.swift */; };
 		EA7BC9FD2360313C00F8EFF1 /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7BC9FC2360313C00F8EFF1 /* ListTableViewCell.swift */; };
 		EA7BCA0523604FBE00F8EFF1 /* SignupFinishViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7BCA0423604FBE00F8EFF1 /* SignupFinishViewController.swift */; };
 		EA7BCA07236059FF00F8EFF1 /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7BCA06236059FF00F8EFF1 /* SideMenuViewController.swift */; };
@@ -43,6 +44,7 @@
 		EA5E0BEC235D35E10098FC82 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EA5E0BF2235D5B640098FC82 /* SignUpAuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpAuthViewController.swift; sourceTree = "<group>"; };
 		EA5E0BF4235D5C1F0098FC82 /* SignUpWebmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpWebmailViewController.swift; sourceTree = "<group>"; };
+		EA65F14A236560A600CA194C /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		EA7BC9FC2360313C00F8EFF1 /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
 		EA7BCA0423604FBE00F8EFF1 /* SignupFinishViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupFinishViewController.swift; sourceTree = "<group>"; };
 		EA7BCA06236059FF00F8EFF1 /* SideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 				EAC4CB6E2362FFD00042801B /* SelectUniversityViewController.swift */,
 				EAC4CB72236300040042801B /* SelectColleageViewController.swift */,
 				EAC4CB742363212D0042801B /* AddContentViewController.swift */,
+				EA65F14A236560A600CA194C /* SearchViewController.swift */,
 			);
 			path = Opencurtain;
 			sourceTree = "<group>";
@@ -248,6 +251,7 @@
 				EA7BCA0523604FBE00F8EFF1 /* SignupFinishViewController.swift in Sources */,
 				EA9A7111235F498000701244 /* LoginViewController.swift in Sources */,
 				EA9A7105235D8F7800701244 /* SignUpLoginViewController.swift in Sources */,
+				EA65F14B236560A600CA194C /* SearchViewController.swift in Sources */,
 				EA7BCA0923605A5300F8EFF1 /* SideMenuTableViewCell.swift in Sources */,
 				EA5E0BF3235D5B640098FC82 /* SignUpAuthViewController.swift in Sources */,
 				EA7BCA07236059FF00F8EFF1 /* SideMenuViewController.swift in Sources */,

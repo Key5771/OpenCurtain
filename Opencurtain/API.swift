@@ -24,10 +24,7 @@ class NetworkRequest {
         case departments = "/departments"
         case posts = "/posts"
         case comments = "/comments"
-    }
-
-    
-    
+    } 
     
 //    func request(api: API, method: Alamofire.HTTPMethod, completion handler: @escaping (DefaultDataResponse) -> Void) {
 //        (Alamofire.request(baseURL+api.rawValue, method: method) as AnyObject).response { response in
@@ -55,13 +52,26 @@ class Users: Mappable {
     }
 }
 
-class User {
+class User: Mappable {
     var id: Int = 0
     var username: String = ""
     var email: String = ""
     var university: Int = 0
     var faculty: Int = 0
     var department: Int = 0
+    
+    required init?(map: Map) {
+        
+    }
+    
+    func mapping(map: Map) {
+        id <- map["id"]
+        username <- map["username"]
+        email <- map["email"]
+        university <- map["university"]
+        faculty <- map["faculty"]
+        department <- map["department"]
+    }
 }
 
 class Subcribes: Mappable {
@@ -82,10 +92,20 @@ class Subcribes: Mappable {
     }
 }
 
-class Subcribe {
+class Subcribe: Mappable {
     var id: Int = 0
     var user: Int = 0
     var board: Int = 0
+    
+    required init?(map: Map) {
+        
+    }
+    
+    func mapping(map: Map) {
+        id <- map["id"]
+        user <- map["user"]
+        board <- map["board"]
+    }
 }
 
 class Boards: Mappable {
@@ -106,10 +126,20 @@ class Boards: Mappable {
     }
 }
 
-class Board {
+class Board: Mappable {
     var url: String = ""
     var id: Int = 0
     var boardname: String = ""
+    
+    required init?(map: Map) {
+        
+    }
+    
+    func mapping(map: Map) {
+        url <- map["url"]
+        id <- map["id"]
+        boardname <- map["boardname"]
+    }
 }
 
 class Universitys: Mappable {
@@ -130,10 +160,20 @@ class Universitys: Mappable {
     }
 }
 
-class University {
+class University: Mappable {
     var id: Int = 0
     var universityName: String = ""
     var board: Int = 0
+    
+    required init?(map: Map) {
+        
+    }
+    
+    func mapping(map: Map) {
+        id <- map["id"]
+        universityName <- map["universityname"]
+        board <- map["board"]
+    }
 }
 
 class Facultys: Mappable {
@@ -154,11 +194,22 @@ class Facultys: Mappable {
     }
 }
 
-class Faculty {
+class Faculty: Mappable {
     var id: Int = 0
     var facultyName: String = ""
     var university: Int = 0
     var board: Int = 0
+    
+    required init?(map: Map) {
+        
+    }
+    
+    func mapping(map: Map) {
+        id <- map["id"]
+        facultyName <- map["facultyname"]
+        university <- map["university"]
+        board <- map["board"]
+    }
 }
 
 class Departments: Mappable {
@@ -179,12 +230,24 @@ class Departments: Mappable {
     }
 }
 
-class Department {
+class Department: Mappable {
     var id: Int = 0
     var departmentName: String = ""
     var faculty: Int = 0
     var university: Int = 0
     var board: Int = 0
+    
+    required init?(map: Map) {
+        
+    }
+    
+    func mapping(map: Map) {
+        id <- map["id"]
+        departmentName <- map["departmentname"]
+        faculty <- map["faculty"]
+        university <- map["university"]
+        board <- map["board"]
+    }
 }
 
 class Posts: Mappable {
@@ -205,13 +268,26 @@ class Posts: Mappable {
     }
 }
 
-class Post {
+class Post: Mappable {
     var id: Int = 0
     var user: String = ""
     var board: String = ""
     var timestamp: String = ""
     var title: String = ""
     var content: String = ""
+    
+    required init?(map: Map) {
+        
+    }
+    
+    func mapping(map: Map) {
+        id <- map["id"]
+        user <- map["user"]
+        board <- map["board"]
+        timestamp <- map["timestamp"]
+        title <- map["title"]
+        content <- map["content"]
+    }
 }
 
 class Comments: Mappable {
