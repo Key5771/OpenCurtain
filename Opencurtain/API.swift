@@ -14,6 +14,7 @@ import Alamofire
 class NetworkRequest {
     let baseURL = "http://opencurtain.run.goorm.io"
     
+    
     enum API: String {
         case users = "/users"
         case subscribes = "/subscribes"
@@ -24,6 +25,7 @@ class NetworkRequest {
         case posts = "/posts"
         case comments = "/comments"
     }
+
     
     
     
