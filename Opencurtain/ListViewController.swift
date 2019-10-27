@@ -26,6 +26,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     var posts: [Posts] = []
     var post: [Post] = []
+    var user: [User] = []
     
     
     override func viewDidLoad() {
@@ -36,8 +37,15 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         listTableView.delegate = self
         listTableView.dataSource = self
         
-//        Alamofire.request(baseURL+"/posts").validate().responseJSON { response in
-//            print(response.result.value)
+//        Alamofire.request(baseURL+"/users").responseObject { (response: DataResponse<Users>) in
+//            let users = response.result.value
+//            if let user = users?.results {
+//                for a in user {
+//                    print(a.username)
+//                }
+//                self.user.append(contentsOf: user)
+//                self.listTableView.reloadData()
+//            }
 //        }
         
         Alamofire.request(baseURL+"/posts").responseObject { (response: DataResponse<Posts>) in
@@ -45,45 +53,30 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             if let results = newPosts?.results {
                 for a in results {
                     print(a.title)
-                    print(a.id)
+                    print(a.user)
+                    print(a.timestamp)
+                    print(a.content)
                 }
-                print(self.post)
+                self.post.append(contentsOf: results)
+                self.listTableView.reloadData()
+                print("post 배열 : \(self.post)")
             }
         }
-        
-//        Alamofire.request(baseURL+"/posts").validate().responseJSON { (response: DataResponse<Any>) in
-//            let newPosts = response.result.value
-//            self.posts.append(newPosts as! Posts)
-//            print(self.posts)
-//        }
-        
-//        Alamofire.request(baseURL+"/posts").validate().responseArray { (response: DataResponse<[Posts]>) in
-//            let newPosts = response.result.value
-//            print(newPosts)
-//        }
-        
-//        Alamofire.request(baseURL+"/posts", method: .get, parameters: [:], encoding: URLEncoding.default).responseArray { (response: DataResponse<[Posts]>) in
-//            if let newPosts = response.result.value {
-//                self.posts = newPosts
-//                print("newPosts 배열 : \(newPosts)")
-//                self.listTableView.reloadData()
-//            }
-//        }
-//        print("posts 배열 : \(posts)")
     }
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return university.count
+        return post.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = listTableView.dequeueReusableCell(withIdentifier: "listCell", for: indexPath) as! ListTableViewCell
         
-        cell.jnuLabel.text = university[indexPath.row]
-        cell.nameLabel.text = name[indexPath.row]
-        cell.timestampLabel.text = timestamp[indexPath.row]
-        cell.contentLabel.text = content[indexPath.row]
+        cell.jnuLabel.text = post[indexPath.row].title
+//        cell.nameLabel.text = post[indexPath.row].user
+        cell.nameLabel.text = "현지훈"
+        cell.timestampLabel.text = post[indexPath.row].timestamp
+        cell.contentLabel.text = post[indexPath.row].content
         
         return cell
     }

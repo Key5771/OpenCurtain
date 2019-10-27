@@ -14,7 +14,6 @@ import Alamofire
 class NetworkRequest {
     let baseURL = "http://opencurtain.run.goorm.io"
     
-    
     enum API: String {
         case users = "/users"
         case subscribes = "/subscribes"
@@ -24,7 +23,13 @@ class NetworkRequest {
         case departments = "/departments"
         case posts = "/posts"
         case comments = "/comments"
-    } 
+    }
+    
+//    func request(api: API, method: Alamofire.HTTPMethod) {
+//        Alamofire.request(baseURL+api.rawValue, method: method).responseObject { (response: DataResponse<Post>) in
+//            <#code#>
+//        }
+//    }
     
 //    func request(api: API, method: Alamofire.HTTPMethod, completion handler: @escaping (DefaultDataResponse) -> Void) {
 //        (Alamofire.request(baseURL+api.rawValue, method: method) as AnyObject).response { response in
@@ -284,7 +289,7 @@ class Post: Mappable {
         id <- map["id"]
         user <- map["user"]
         board <- map["board"]
-        timestamp <- map["timestamp"]
+        timestamp <- map["timestemp"]
         title <- map["title"]
         content <- map["content"]
     }
