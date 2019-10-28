@@ -18,23 +18,40 @@ class NetworkRequest {
     let baseURL = "http://opencurtain.run.goorm.io"
     
     enum API: String {
-        case users = "/users"
-        case subscribes = "/subscribes"
-        case boards = "/boards"
-        case universitys = "/universitys"
-        case facultys = "/facultys"
-        case departments = "/departments"
-        case posts = "/posts"
-        case comments = "/comments"
+        case users = "/user/"
+        case subscribes = "/subscribes/"
+        case boards = "/boards/"
+        case universitys = "/universitys/"
+        case facultys = "/facultys/"
+        case departments = "/departments/"
+        case posts = "/posts/"
+        case comments = "/comments/"
+        case authcode = "/authcode/"
+        case authcheck = "/authcheck/"
     }
     
-    func request<T: Results>(api: API, method: Alamofire.HTTPMethod, type: T.Type, completion handler: @escaping ([T.M]) -> Void) {
-        Alamofire.request(baseURL+api.rawValue, method: method).responseObject { (response: DataResponse<T>) in
+    func request<T: Results>(api: API, method: Alamofire.HTTPMethod, type: T.Type, parameters: Parameters? = nil, completion handler: @escaping ([T.M]) -> Void) {
+        Alamofire.request(baseURL+api.rawValue, method: method, parameters: parameters).responseObject { (response: DataResponse<T>) in
             let data = response.result.value
+            print(data)
             if let result = data?.results {
                 handler(result)
             }
         }
+    }
+    
+    func request(api: API, method: Alamofire.HTTPMethod, parameters: Parameters? = nil, completion handler: @escaping (Error?) -> Void) {
+        Alamofire.request(baseURL+api.rawValue, method: method, parameters: parameters).response { (response) in
+            if response.response?.statusCode == 200 {
+                handler(nil)
+            } else {
+                handler(NetworkError.http404)
+            }
+        }
+    }
+    
+    enum NetworkError: Error {
+        case http404
     }
     
 //    func request(api: API, method: Alamofire.HTTPMethod, completion handler: @escaping (DefaultDataResponse) -> Void) {
@@ -79,6 +96,9 @@ class User: Mappable {
     var university: Int = 0
     var faculty: Int = 0
     var department: Int = 0
+    var authcode: Int = 0
+    
+    init() { }
     
     required init?(map: Map) {
         
@@ -91,6 +111,7 @@ class User: Mappable {
         university <- map["university"]
         faculty <- map["faculty"]
         department <- map["department"]
+        authcode <- map["authcode"]
     }
 }
 

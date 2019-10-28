@@ -13,8 +13,8 @@ class SelectColleageViewController: UIViewController, UIPickerViewDataSource, UI
     @IBOutlet weak var colleageTextfield: UITextField!
     @IBOutlet weak var majorTextfield: UITextField!
     
-    var pickColleage = ["공과대학", "경상대학", "자연대학", "간호대학"]
-    var pickMajor = ["컴퓨터공학전공", "에너지공학과", "메카트로닉스공학전공", "무역학과", "경제학과", "수학과", "화학과", "물리학과", "간호학과"]
+    var pickFaculty: [Faculty] = []
+    var pickDepartment: [Department] = []
     
     let pickerView1 = UIPickerView()
     let pickerView2 = UIPickerView()
@@ -23,6 +23,9 @@ class SelectColleageViewController: UIViewController, UIPickerViewDataSource, UI
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        getFaculty()
+        getMajor()
         
         nextButton.layer.cornerRadius = 5
         
@@ -42,8 +45,9 @@ class SelectColleageViewController: UIViewController, UIPickerViewDataSource, UI
         
         let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItem.Style.done, target: self, action: #selector(self.donePicker))
         let cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.donePicker))
+        let space = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         
-        toolbar.setItems([cancelButton, doneButton], animated: false)
+        toolbar.setItems([cancelButton, space, doneButton], animated: false)
         toolbar.isUserInteractionEnabled = true
         
         colleageTextfield.inputView = pickerView1
@@ -53,7 +57,21 @@ class SelectColleageViewController: UIViewController, UIPickerViewDataSource, UI
         majorTextfield.inputAccessoryView = toolbar
     }
     
+    func getFaculty() {
+        NetworkRequest.shared.request(api: .facultys, method: .get, type: Facultys.self) { (results) in
+            self.pickFaculty = results
+        }
+    }
+    
+    func getMajor() {
+        NetworkRequest.shared.request(api: .departments, method: .get, type: Departments.self) { (results) in
+            self.pickDepartment = results
+        }
+    }
+    
     @objc func donePicker() {
+        colleageTextfield.text = pickFaculty[pickerView1.selectedRow(inComponent: 0)].facultyName
+        majorTextfield.text = pickDepartment[pickerView2.selectedRow(inComponent: 0)].departmentName
         colleageTextfield.resignFirstResponder()
         majorTextfield.resignFirstResponder()
     }
@@ -64,9 +82,9 @@ class SelectColleageViewController: UIViewController, UIPickerViewDataSource, UI
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if pickerView == pickerView1{
-            return pickColleage.count
+            return pickFaculty.count
         } else if pickerView == pickerView2 {
-            return pickMajor.count
+            return pickDepartment.count
         }
         
         return 1
@@ -74,20 +92,20 @@ class SelectColleageViewController: UIViewController, UIPickerViewDataSource, UI
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if pickerView == pickerView1 {
-            return pickColleage[row]
+            return pickFaculty[row].facultyName
         } else if pickerView == pickerView2 {
-            return pickMajor[row]
+            return pickDepartment[row].departmentName
         }
         return ""
     }
     
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        if pickerView == pickerView1 {
-            colleageTextfield.text = pickColleage[row]
-        } else if pickerView == pickerView2 {
-            majorTextfield.text = pickMajor[row]
-        }
-    }
+//    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+//        if pickerView == pickerView1 {
+//            colleageTextfield.text = pickColleage[row].
+//        } else if pickerView == pickerView2 {
+//            majorTextfield.text = pickMajor[row]
+//        }
+//    }
     
     
 

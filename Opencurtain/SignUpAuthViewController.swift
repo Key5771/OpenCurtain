@@ -9,12 +9,33 @@
 import UIKit
 
 class SignUpAuthViewController: UIViewController {
-
+    @IBOutlet weak var authCodeTextfield: UITextField!
+    
+    var user = User()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
+    
+    func postAuth() {
+                self.user.authcode = Int(self.authCodeTextfield.text ?? "") ?? 0
+        print(user.toJSON())
+
+        NetworkRequest.shared.request(api: .authcheck, method: .post, parameters: user.toJSON()) { (error) in
+            if error == nil {
+                
+            } else {
+                
+            }
+        }
+    }
+    
+    @IBAction func authClick(_ sender: Any) {
+        postAuth()
+    }
+    
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)

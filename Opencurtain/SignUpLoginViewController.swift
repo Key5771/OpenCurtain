@@ -17,6 +17,8 @@ class SignUpLoginViewController: UIViewController {
     @IBOutlet weak var passwordLabel: UILabel!
     @IBOutlet weak var passwordTextField: UITextField!
     
+    var user = User()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

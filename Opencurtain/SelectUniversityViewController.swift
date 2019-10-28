@@ -11,17 +11,21 @@ import UIKit
 class SelectUniversityViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var universityTextfield: UITextField!
+    let pickerView = UIPickerView()
     
-    var pickUniversity = ["제주대학교", "제주한라대학교", "제주관광대학교", "제주국제대학교"]
+//    var pickUniversity = ["제주대학교", "제주한라대학교", "제주관광대학교", "제주국제대학교"]
+    var pickUniversity: [University] = []
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         
+        getUniversity()
+        
         nextButton.layer.cornerRadius = 5
         
-        let pickerView = UIPickerView()
         pickerView.delegate = self
         pickerView.dataSource = self
         
@@ -32,15 +36,25 @@ class SelectUniversityViewController: UIViewController, UIPickerViewDelegate, UI
         
         let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItem.Style.done, target: self, action: #selector(self.donePicker))
         let cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.donePicker))
+        let space = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         
-        toolbar.setItems([cancelButton, doneButton], animated: false)
+        toolbar.setItems([cancelButton, space, doneButton], animated: false)
         toolbar.isUserInteractionEnabled = true
         
         universityTextfield.inputView = pickerView
         universityTextfield.inputAccessoryView = toolbar
     }
     
+    func getUniversity() {
+        NetworkRequest.shared.request(api: .universitys, method: .get, type: Universitys.self) { (results) in
+            self.pickUniversity = results
+            print(results)
+        }
+    }
+    
     @objc func donePicker() {
+        guard pickUniversity.count > 0 else { return }
+        universityTextfield.text = pickUniversity[pickerView.selectedRow(inComponent: 0)].universityName
         universityTextfield.resignFirstResponder()
     }
     
@@ -53,12 +67,12 @@ class SelectUniversityViewController: UIViewController, UIPickerViewDelegate, UI
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return pickUniversity[row]
+        return pickUniversity[row].universityName
     }
     
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        universityTextfield.text = pickUniversity[row]
-    }
+//    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+//        universityTextfield.text = pickUniversity[row]
+//    }
 
     /*
     // MARK: - Navigation

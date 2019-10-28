@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddContentViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class AddContentViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate{
     @IBOutlet weak var contentTextview: UITextView!
     @IBOutlet weak var galleryButton: UIButton!
     @IBOutlet weak var cameraButton: UIButton!
@@ -25,10 +25,31 @@ class AddContentViewController: UIViewController, UIImagePickerControllerDelegat
         contentTextview.layer.borderWidth = 1
         contentTextview.layer.borderColor = UIColor.lightGray.cgColor
         contentTextview.layer.cornerRadius = 5
+        contentTextview.delegate = self
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        textViewSetupView()
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text == "" {
+            textViewSetupView()
+        }
+    }
+    
+    func textViewSetupView() {
+        if contentTextview.text == "내용 입력" {
+            contentTextview.text = ""
+            contentTextview.textColor = UIColor.black
+        } else if contentTextview.text == "" {
+            contentTextview.text = "내용 입력"
+            contentTextview.textColor = UIColor.lightGray
+        }
     }
     
     @IBAction func galleryButtonClick(_ sender: Any) {
@@ -36,26 +57,6 @@ class AddContentViewController: UIViewController, UIImagePickerControllerDelegat
         present(picker, animated: true, completion: nil)
     }
     
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        contentSetup()
-    }
-    
-    func textViewDidEndEditing(_ textView: UITextView) {
-        if textView.text == "" {
-            contentSetup()
-        }
-    }
-
-
-    func contentSetup() {
-        if contentTextview.text == "" {
-            contentTextview.text = "내용 입력"
-            contentTextview.textColor = UIColor.lightGray
-        } else {
-            contentTextview.text = ""
-            contentTextview.textColor = UIColor.black
-        }
-    }
     
     @IBAction func cameraButtonClick(_ sender: Any) {
         if (UIImagePickerController .isSourceTypeAvailable(.camera)) {

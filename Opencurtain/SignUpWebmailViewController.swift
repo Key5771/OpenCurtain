@@ -13,7 +13,7 @@ class SignUpWebmailViewController: UIViewController {
     @IBOutlet var tapGesture: UITapGestureRecognizer!
     @IBOutlet weak var webmailTextfield: UITextField!
     
-    var user: [User] = []
+    var user = User()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,8 +28,17 @@ class SignUpWebmailViewController: UIViewController {
     }
     
     func postUserEmail() {
-        NetworkRequest.shared.request(api: .users, method: .post, type: Users.self) { (results) in
-            
+        self.user.email = self.webmailTextfield.text ?? ""
+        
+        NetworkRequest.shared.request(api: .authcode, method: .post, parameters: user.toJSON()) { (error) in
+            if error == nil {
+                let viewController = self.storyboard?.instantiateViewController(identifier: "auth") as? SignUpAuthViewController
+                
+                viewController?.user = self.user
+                self.navigationController?.pushViewController((viewController)!, animated: true)
+            } else {
+                print("Get Error : \(error)")
+            }
         }
     }
     
@@ -38,14 +47,16 @@ class SignUpWebmailViewController: UIViewController {
         self.view.endEditing(true)
     }
     
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
+        
+        
     }
-    */
+    
 
 }
