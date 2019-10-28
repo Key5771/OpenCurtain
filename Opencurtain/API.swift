@@ -15,7 +15,7 @@ class NetworkRequest {
     static let shared: NetworkRequest = NetworkRequest()
     private init() { }
     
-    let baseURL = "http://opencurtain-test.run.goorm.io"
+    let baseURL = "http://opencurtain.run.goorm.io"
     
     enum API: String {
         case users = "/user/"
@@ -29,6 +29,7 @@ class NetworkRequest {
         case authcode = "/authcode/"
         case authcheck = "/authcheck/"
         case login = "/user/login/"
+        case logout = "/user/logout"
     }
     
     func request<T: Results>(api: API, method: Alamofire.HTTPMethod, type: T.Type, parameters: Parameters? = nil, completion handler: @escaping ([T.M]) -> Void) {
@@ -316,10 +317,12 @@ class Posts: Results {
 class Post: Mappable {
     var id: Int = 0
     var user: String = ""
-    var board: String = ""
+    var board: Int = 0
     var timestamp: String = ""
     var title: String = ""
     var content: String = ""
+    
+    init() { }
     
     required init?(map: Map) {
         
@@ -335,11 +338,11 @@ class Post: Mappable {
     }
 }
 
-class Comments: Mappable {
+class Comments: Results {
     var count: Int = 0
-    var next: Int = 0
-    var previous: Int = 0
-//    var results = [String] = [""]
+    var next: String = ""
+    var previous: String = ""
+    var results: [Comment] = []
     
     required init?(map: Map) {
         
@@ -349,7 +352,21 @@ class Comments: Mappable {
         count <- map["count"]
         next <- map["next"]
         previous <- map["previous"]
-//        results <- map["results"]
+        results <- map["results"]
+    }
+}
+
+class Comment: Mappable {
+    var posts: Int = 0
+    var comment: String = ""
+    
+    required init?(map: Map) {
+        
+    }
+    
+    func mapping(map: Map) {
+        posts <- map["posts"]
+        comment <- map["comment"]
     }
 }
 

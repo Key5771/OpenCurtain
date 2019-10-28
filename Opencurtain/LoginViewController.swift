@@ -22,6 +22,7 @@ class LoginViewController: UIViewController {
     }
     
     func postLogin() {
+        HTTPCookieStorage.shared.cookies?.forEach { HTTPCookieStorage.shared.deleteCookie($0) }
         self.user["email"] = emailTextfield.text ?? ""
         self.user["password"] = passwordTextfield.text ?? ""
         NetworkRequest.shared.request(api: .login, method: .post, parameters: user) { (error) in

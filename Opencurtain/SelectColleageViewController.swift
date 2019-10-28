@@ -105,7 +105,6 @@ class SelectColleageViewController: UIViewController, UIPickerViewDataSource, UI
         } else if pickerView == pickerView2 {
             return pickDepartment.count
         }
-        
         return 1
     }
     

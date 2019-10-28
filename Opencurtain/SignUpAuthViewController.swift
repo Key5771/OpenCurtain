@@ -30,6 +30,10 @@ class SignUpAuthViewController: UIViewController {
                 viewController?.user = self.user
                 self.navigationController?.pushViewController(viewController!, animated: true)
             } else {
+                let alertController = UIAlertController(title: "인증번호 오류", message: "인증번호가 틀립니다.", preferredStyle: .alert)
+                let okButton = UIAlertAction(title: "확인", style: .default, handler: nil)
+                alertController.addAction(okButton)
+                self.present(alertController, animated: true, completion: nil)
                 print("Get Error : \(error)")
             }
         }

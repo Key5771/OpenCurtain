@@ -31,7 +31,17 @@ class ViewController: UIViewController {
         loginButton.layer.masksToBounds = false
         loginButton.layer.cornerRadius = 4.0
         
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        NetworkRequest.shared.request(api: .users, method: .get) { (error) in
+            if error == nil {
+                let viewController = self.storyboard?.instantiateViewController(identifier: "listView")
+                
+                viewController?.modalPresentationStyle = .overFullScreen
+                self.present(viewController!, animated: true, completion: nil)
+            }
+        }
     }
     
     @IBAction func signUpButtonClick(_ sender: Any) {

@@ -12,8 +12,13 @@ class AddContentViewController: UIViewController, UIImagePickerControllerDelegat
     @IBOutlet weak var contentTextview: UITextView!
     @IBOutlet weak var galleryButton: UIButton!
     @IBOutlet weak var cameraButton: UIButton!
+    @IBOutlet weak var titleTextfield: UITextField!
+    @IBOutlet weak var saveButton: UIBarButtonItem!
     
     let picker = UIImagePickerController()
+    
+    var post = Post()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +31,20 @@ class AddContentViewController: UIViewController, UIImagePickerControllerDelegat
         contentTextview.layer.borderColor = UIColor.lightGray.cgColor
         contentTextview.layer.cornerRadius = 5
         contentTextview.delegate = self
+    }
+    
+    func postContent() {
+        self.post.content = self.contentTextview.text
+        self.post.title = self.titleTextfield.text ?? ""
+        self.post.board = 1
+        
+        NetworkRequest.shared.request(api: .posts, method: .post, parameters: post.toJSON()) { (error) in
+            if error == nil {
+                self.dismiss(animated: true, completion: nil)
+            } else {
+                print("\(error)")
+            }
+        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -51,6 +70,11 @@ class AddContentViewController: UIViewController, UIImagePickerControllerDelegat
             contentTextview.textColor = UIColor.lightGray
         }
     }
+    
+    @IBAction func saveButtonClick(_ sender: Any) {
+        postContent()
+    }
+    
     
     @IBAction func galleryButtonClick(_ sender: Any) {
         picker.sourceType = .photoLibrary

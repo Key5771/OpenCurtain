@@ -37,6 +37,10 @@ class SignUpWebmailViewController: UIViewController {
                 viewController?.user = self.user
                 self.navigationController?.pushViewController((viewController)!, animated: true)
             } else {
+                let alertController = UIAlertController(title: "이메일 오류", message: "유효하지 않은 이메일입니다.", preferredStyle: .alert)
+                let okButton = UIAlertAction(title: "확인", style: .default, handler: nil)
+                alertController.addAction(okButton)
+                self.present(alertController, animated: true, completion: nil)
                 print("Get Error : \(error)")
             }
         }
