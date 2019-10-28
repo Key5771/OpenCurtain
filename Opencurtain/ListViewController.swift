@@ -16,8 +16,9 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var sideButton: UIBarButtonItem!
     @IBOutlet weak var listTableView: UITableView!
     
-    var api = NetworkRequest()
     let baseURL = "http://opencurtain.run.goorm.io"
+    
+    private let refreshController = UIRefreshControl()
     
     var university: [String] = ["제주대학교", "제주한라대학교"]
     var name: [String] = ["익명", "익명"]
@@ -28,6 +29,9 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     var post: [Post] = []
     var user: [User] = []
     
+    override func viewWillAppear(_ animated: Bool) {
+        getPosts()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,20 +52,34 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
 //            }
 //        }
         
-        Alamofire.request(baseURL+"/posts").responseObject { (response: DataResponse<Posts>) in
-            let newPosts = response.result.value
-            if let results = newPosts?.results {
-                for a in results {
-                    print(a.title)
-                    print(a.user)
-                    print(a.timestamp)
-                    print(a.content)
-                }
-                self.post.append(contentsOf: results)
-                self.listTableView.reloadData()
-                print("post 배열 : \(self.post)")
-            }
+//        Alamofire.request(baseURL+"/posts").responseObject { (response: DataResponse<Posts>) in
+//            let newPosts = response.result.value
+//            if let results = newPosts?.results {
+//                for a in results {
+//                    print(a.title)
+//                    print(a.user)
+//                    print(a.timestamp)
+//                    print(a.content)
+//                }
+//                self.post.append(contentsOf: results)
+//                self.listTableView.reloadData()
+//                print("post 배열 : \(self.post)")
+//            }
+        
+        listTableView.refreshControl = refreshController
+        refreshController.addTarget(self, action: #selector(refresh), for: .valueChanged)
+    }
+    
+    func getPosts() {
+        NetworkRequest.shared.request(api: .posts, method: .get, type: Posts.self) { (results) in
+            self.post = results
+            self.refreshController.endRefreshing()
+            self.listTableView.reloadData()
         }
+    }
+    
+    @objc func refresh() {
+        getPosts()
     }
     
     
@@ -75,7 +93,8 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.jnuLabel.text = post[indexPath.row].title
 //        cell.nameLabel.text = post[indexPath.row].user
         cell.nameLabel.text = "현지훈"
-        cell.timestampLabel.text = post[indexPath.row].timestamp
+        let time = post[indexPath.row].timestamp.components(separatedBy: ["-", "T", ":", "."])
+        cell.timestampLabel.text = "\(time[0])년 \(time[1])월 \(time[2])일 \(time[3])시 \(time[4])분 \(time[5])초"
         cell.contentLabel.text = post[indexPath.row].content
         
         return cell

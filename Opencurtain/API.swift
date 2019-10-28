@@ -12,6 +12,9 @@ import AlamofireObjectMapper
 import Alamofire
 
 class NetworkRequest {
+    static let shared: NetworkRequest = NetworkRequest()
+    private init() { }
+    
     let baseURL = "http://opencurtain.run.goorm.io"
     
     enum API: String {
@@ -25,11 +28,14 @@ class NetworkRequest {
         case comments = "/comments"
     }
     
-//    func request(api: API, method: Alamofire.HTTPMethod) {
-//        Alamofire.request(baseURL+api.rawValue, method: method).responseObject { (response: DataResponse<Post>) in
-//            <#code#>
-//        }
-//    }
+    func request<T: Results>(api: API, method: Alamofire.HTTPMethod, type: T.Type, completion handler: @escaping ([T.M]) -> Void) {
+        Alamofire.request(baseURL+api.rawValue, method: method).responseObject { (response: DataResponse<T>) in
+            let data = response.result.value
+            if let result = data?.results {
+                handler(result)
+            }
+        }
+    }
     
 //    func request(api: API, method: Alamofire.HTTPMethod, completion handler: @escaping (DefaultDataResponse) -> Void) {
 //        (Alamofire.request(baseURL+api.rawValue, method: method) as AnyObject).response { response in
@@ -40,10 +46,19 @@ class NetworkRequest {
     
 }
 
-class Users: Mappable {
+protocol Results: Mappable {
+    associatedtype M: Mappable
+    
+    var count: Int { get set }
+    var next: String { get set }
+    var previous: String { get set }
+    var results: [M] { get set }
+}
+
+class Users: Results {
     var count: Int = 0
-    var next: Int = 0
-    var previous: Int = 0
+    var next: String = ""
+    var previous: String = ""
     var results: [User] = []
     
     required init?(map: Map) {
@@ -79,10 +94,10 @@ class User: Mappable {
     }
 }
 
-class Subcribes: Mappable {
+class Subcribes: Results {
     var count: Int = 0
-    var next: Int = 0
-    var previous: Int = 0
+    var next: String = ""
+    var previous: String = ""
     var results: [Subcribe] = []
     
     required init?(map: Map) {
@@ -113,10 +128,10 @@ class Subcribe: Mappable {
     }
 }
 
-class Boards: Mappable {
+class Boards: Results {
     var count: Int = 0
-    var next: Int = 0
-    var previous: Int = 0
+    var next: String = ""
+    var previous: String = ""
     var results: [Board] = []
     
     required init?(map: Map) {
@@ -147,10 +162,10 @@ class Board: Mappable {
     }
 }
 
-class Universitys: Mappable {
+class Universitys: Results {
     var count: Int = 0
-    var next: Int = 0
-    var previous: Int = 0
+    var next: String = ""
+    var previous: String = ""
     var results: [University] = []
     
     required init?(map: Map) {
@@ -181,10 +196,10 @@ class University: Mappable {
     }
 }
 
-class Facultys: Mappable {
+class Facultys: Results {
     var count: Int = 0
-    var next: Int = 0
-    var previous: Int = 0
+    var next: String = ""
+    var previous: String = ""
     var results: [Faculty] = []
     
     required init?(map: Map) {
@@ -217,10 +232,10 @@ class Faculty: Mappable {
     }
 }
 
-class Departments: Mappable {
+class Departments: Results {
     var count: Int = 0
-    var next: Int = 0
-    var previous: Int = 0
+    var next: String = ""
+    var previous: String = ""
     var results: [Department] = []
     
     required init?(map: Map) {
@@ -255,10 +270,10 @@ class Department: Mappable {
     }
 }
 
-class Posts: Mappable {
+class Posts: Results {
     var count: Int = 0
-    var next: Int = 0
-    var previous: Int = 0
+    var next: String = ""
+    var previous: String = ""
     var results: [Post] = []
     
     required init?(map: Map) {

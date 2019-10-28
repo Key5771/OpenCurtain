@@ -87,6 +87,7 @@
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
+                                    <action selector="nextButtonClick:" destination="xH7-dK-OWa" eventType="touchUpInside" id="09f-M2-zOD"/>
                                     <segue destination="0mF-LG-NPx" kind="show" id="LJ7-f5-Kh0"/>
                                 </connections>
                             </button>
@@ -120,6 +121,7 @@
                     <connections>
                         <outlet property="nextButton" destination="oPA-QS-RUM" id="wYP-CE-4Pe"/>
                         <outlet property="tapGesture" destination="F0n-Ac-4oz" id="J4i-lR-w7A"/>
+                        <outlet property="webmailTextfield" destination="pCS-RF-CZQ" id="BeN-HV-HJb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q80-Xa-fmc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -830,13 +832,13 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2019.10.23" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u5U-La-3XG">
-                                                    <rect key="frame" x="80" y="69" width="254" height="18"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <rect key="frame" x="80" y="69" width="254" height="14.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="금융권 준비하시는 분 계신가요? 이번에 졸업해서 준비를 하려는데 여러모로 걱정이 많네요 ㅠㅠ ncs 준비는 어떻게 하시는지, 그 외 다른 부분은 어떤거 준…" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dVY-KW-pow">
-                                                    <rect key="frame" x="32" y="103" width="350" height="50.5"/>
+                                                    <rect key="frame" x="32" y="99.5" width="350" height="50.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -1091,13 +1093,12 @@
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="WqT-u5-29y">
                                 <rect key="frame" x="8" y="96" width="398" height="317"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qdm-I2-YJ5">
-                                <rect key="frame" x="0.0" y="776" width="414" height="70"/>
+                                <rect key="frame" x="0.0" y="743" width="414" height="70"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TD9-8o-M5P">
                                         <rect key="frame" x="315" y="16" width="24" height="38"/>
@@ -1113,9 +1114,8 @@
                                             <action selector="cameraButtonClick:" destination="Zmz-jq-YqT" eventType="touchUpInside" id="nhC-Mc-thD"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="첨부파일" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cny-nE-39x">
-                                        <rect key="frame" x="21" y="30" width="59" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="첨부파일" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cny-nE-39x">
+                                        <rect key="frame" x="32" y="16" width="59" height="38"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.39215686274509803" green="0.39215686274509803" blue="0.40784313725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -1126,9 +1126,12 @@
                                     <constraint firstAttribute="bottom" secondItem="TD9-8o-M5P" secondAttribute="bottom" constant="16" id="5vr-Bt-JAO"/>
                                     <constraint firstItem="Fvf-Hn-60j" firstAttribute="top" secondItem="Qdm-I2-YJ5" secondAttribute="top" constant="16" id="7If-jd-ma5"/>
                                     <constraint firstAttribute="bottom" secondItem="Fvf-Hn-60j" secondAttribute="bottom" constant="16" id="7xc-AN-mhf"/>
+                                    <constraint firstAttribute="bottom" secondItem="cny-nE-39x" secondAttribute="bottom" constant="16" id="DeP-ao-rpo"/>
                                     <constraint firstItem="Fvf-Hn-60j" firstAttribute="leading" secondItem="TD9-8o-M5P" secondAttribute="trailing" constant="16" id="K2X-n5-tdT"/>
+                                    <constraint firstItem="cny-nE-39x" firstAttribute="leading" secondItem="Qdm-I2-YJ5" secondAttribute="leading" constant="32" id="NgI-sd-gzz"/>
                                     <constraint firstItem="TD9-8o-M5P" firstAttribute="top" secondItem="Qdm-I2-YJ5" secondAttribute="top" constant="16" id="SX0-yV-zXA"/>
                                     <constraint firstAttribute="trailing" secondItem="Fvf-Hn-60j" secondAttribute="trailing" constant="32" id="YYA-RY-sYc"/>
+                                    <constraint firstItem="cny-nE-39x" firstAttribute="top" secondItem="Qdm-I2-YJ5" secondAttribute="top" constant="16" id="gMb-AT-rGy"/>
                                     <constraint firstAttribute="height" constant="70" id="lN1-A8-3BW"/>
                                 </constraints>
                             </view>
@@ -1140,7 +1143,7 @@
                             <constraint firstItem="WqT-u5-29y" firstAttribute="leading" secondItem="ya0-6z-7Vk" secondAttribute="leading" constant="8" id="J4B-jC-wGx"/>
                             <constraint firstItem="ya0-6z-7Vk" firstAttribute="trailing" secondItem="Qdm-I2-YJ5" secondAttribute="trailing" id="Nlq-3Q-hmc"/>
                             <constraint firstItem="ya0-6z-7Vk" firstAttribute="trailing" secondItem="WqT-u5-29y" secondAttribute="trailing" constant="8" id="QHG-v9-9A5"/>
-                            <constraint firstAttribute="bottom" secondItem="Qdm-I2-YJ5" secondAttribute="bottom" constant="50" id="kDa-eT-OSb"/>
+                            <constraint firstItem="ya0-6z-7Vk" firstAttribute="bottom" secondItem="Qdm-I2-YJ5" secondAttribute="bottom" id="kDa-eT-OSb"/>
                             <constraint firstItem="Qdm-I2-YJ5" firstAttribute="leading" secondItem="ya0-6z-7Vk" secondAttribute="leading" id="two-Si-HpD"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ya0-6z-7Vk"/>

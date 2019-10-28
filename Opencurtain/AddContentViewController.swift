@@ -36,6 +36,27 @@ class AddContentViewController: UIViewController, UIImagePickerControllerDelegat
         present(picker, animated: true, completion: nil)
     }
     
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        contentSetup()
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text == "" {
+            contentSetup()
+        }
+    }
+
+
+    func contentSetup() {
+        if contentTextview.text == "" {
+            contentTextview.text = "내용 입력"
+            contentTextview.textColor = UIColor.lightGray
+        } else {
+            contentTextview.text = ""
+            contentTextview.textColor = UIColor.black
+        }
+    }
+    
     @IBAction func cameraButtonClick(_ sender: Any) {
         if (UIImagePickerController .isSourceTypeAvailable(.camera)) {
             picker.sourceType = .camera

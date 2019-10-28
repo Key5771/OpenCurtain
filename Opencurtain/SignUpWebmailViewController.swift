@@ -11,6 +11,9 @@ import UIKit
 class SignUpWebmailViewController: UIViewController {
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet var tapGesture: UITapGestureRecognizer!
+    @IBOutlet weak var webmailTextfield: UITextField!
+    
+    var user: [User] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,6 +22,17 @@ class SignUpWebmailViewController: UIViewController {
         
         nextButton.layer.cornerRadius = 5
     }
+    
+    @IBAction func nextButtonClick(_ sender: Any) {
+        postUserEmail()
+    }
+    
+    func postUserEmail() {
+        NetworkRequest.shared.request(api: .users, method: .post, type: Users.self) { (results) in
+            
+        }
+    }
+    
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
