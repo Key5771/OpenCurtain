@@ -25,9 +25,12 @@ class SignUpAuthViewController: UIViewController {
 
         NetworkRequest.shared.request(api: .authcheck, method: .post, parameters: user.toJSON()) { (error) in
             if error == nil {
+                let viewController = self.storyboard?.instantiateViewController(identifier: "signUpLogin") as? SignUpLoginViewController
                 
+                viewController?.user = self.user
+                self.navigationController?.pushViewController(viewController!, animated: true)
             } else {
-                
+                print("Get Error : \(error)")
             }
         }
     }

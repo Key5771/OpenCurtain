@@ -13,6 +13,8 @@ class SelectUniversityViewController: UIViewController, UIPickerViewDelegate, UI
     @IBOutlet weak var universityTextfield: UITextField!
     let pickerView = UIPickerView()
     
+    var user = User()
+    
 //    var pickUniversity = ["제주대학교", "제주한라대학교", "제주관광대학교", "제주국제대학교"]
     var pickUniversity: [University] = []
     
@@ -45,6 +47,14 @@ class SelectUniversityViewController: UIViewController, UIPickerViewDelegate, UI
         universityTextfield.inputAccessoryView = toolbar
     }
     
+    @IBAction func nextClick(_ sender: Any) {
+        let viewController = self.storyboard?.instantiateViewController(identifier: "selectColleage") as? SelectColleageViewController
+        
+        viewController?.user = self.user
+        self.navigationController?.pushViewController(viewController!, animated: true)
+    }
+    
+    
     func getUniversity() {
         NetworkRequest.shared.request(api: .universitys, method: .get, type: Universitys.self) { (results) in
             self.pickUniversity = results
@@ -67,6 +77,7 @@ class SelectUniversityViewController: UIViewController, UIPickerViewDelegate, UI
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        self.user.university = pickUniversity[row].id
         return pickUniversity[row].universityName
     }
     

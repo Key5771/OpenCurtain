@@ -15,7 +15,7 @@ class NetworkRequest {
     static let shared: NetworkRequest = NetworkRequest()
     private init() { }
     
-    let baseURL = "http://opencurtain.run.goorm.io"
+    let baseURL = "http://opencurtain-test.run.goorm.io"
     
     enum API: String {
         case users = "/user/"
@@ -93,6 +93,7 @@ class User: Mappable {
     var id: Int = 0
     var username: String = ""
     var email: String = ""
+    var password: String = ""
     var university: Int = 0
     var faculty: Int = 0
     var department: Int = 0
@@ -108,6 +109,7 @@ class User: Mappable {
         id <- map["id"]
         username <- map["username"]
         email <- map["email"]
+        password <- map["password"]
         university <- map["university"]
         faculty <- map["faculty"]
         department <- map["department"]

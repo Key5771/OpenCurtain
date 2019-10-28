@@ -16,6 +16,8 @@ class SelectColleageViewController: UIViewController, UIPickerViewDataSource, UI
     var pickFaculty: [Faculty] = []
     var pickDepartment: [Department] = []
     
+    var user = User()
+    
     let pickerView1 = UIPickerView()
     let pickerView2 = UIPickerView()
     
@@ -57,6 +59,23 @@ class SelectColleageViewController: UIViewController, UIPickerViewDataSource, UI
         majorTextfield.inputAccessoryView = toolbar
     }
     
+    @IBAction func nextClick(_ sender: Any) {
+        postUser()
+    }
+    
+    func postUser() {
+        NetworkRequest.shared.request(api: .users, method: .post, parameters: user.toJSON()) { (error) in
+            if error == nil {
+                let viewController = self.storyboard?.instantiateViewController(identifier: "signUpFinish") as? SignupFinishViewController
+                
+                self.navigationController?.pushViewController(viewController!, animated: true)
+            } else {
+                print("\(error)")
+            }
+        }
+    }
+    
+    
     func getFaculty() {
         NetworkRequest.shared.request(api: .facultys, method: .get, type: Facultys.self) { (results) in
             self.pickFaculty = results
@@ -92,8 +111,10 @@ class SelectColleageViewController: UIViewController, UIPickerViewDataSource, UI
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if pickerView == pickerView1 {
+            self.user.faculty = pickFaculty[row].id
             return pickFaculty[row].facultyName
         } else if pickerView == pickerView2 {
+            self.user.department = pickDepartment[row].id
             return pickDepartment[row].departmentName
         }
         return ""

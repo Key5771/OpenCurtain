@@ -12,10 +12,10 @@ class SignUpLoginViewController: UIViewController {
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var emailTextField: UITextField!
-    @IBOutlet weak var idLabel: UILabel!
-    @IBOutlet weak var idTextField: UITextField!
     @IBOutlet weak var passwordLabel: UILabel!
     @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var usernameLabel: UILabel!
+    @IBOutlet weak var usernameTextfield: UITextField!
     
     var user = User()
     
@@ -26,9 +26,24 @@ class SignUpLoginViewController: UIViewController {
         
         nextButton.layer.cornerRadius = 5
         
+        emailTextField.text = user.email
+        
     }
     
-
+    func postIdPw() {
+        self.user.password = self.passwordTextField.text ?? ""
+        self.user.username = self.usernameTextfield.text ?? ""
+    }
+    
+    @IBAction func nextClick(_ sender: Any) {
+        postIdPw()
+        let viewController = self.storyboard?.instantiateViewController(identifier: "selectUniversity") as? SelectUniversityViewController
+        
+        viewController?.user = self.user
+        
+        self.navigationController?.pushViewController(viewController!, animated: true)
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
