@@ -10,6 +10,10 @@ import UIKit
 
 class LoginViewController: UIViewController {
     @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var emailTextfield: UITextField!
+    @IBOutlet weak var passwordTextfield: UITextField!
+    
+    var user: [String:String] = [:]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,10 +21,22 @@ class LoginViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    func postLogin() {
+        self.user["email"] = emailTextfield.text ?? ""
+        self.user["password"] = passwordTextfield.text ?? ""
+        NetworkRequest.shared.request(api: .login, method: .post, parameters: user) { (error) in
+            if error == nil {
+                let viewController = self.storyboard?.instantiateViewController(identifier: "listView")
+                viewController?.modalPresentationStyle = .overFullScreen
+                self.present(viewController!, animated: true, completion: nil)
+            } else {
+                print("\(error)")
+            }
+        }
+    }
+    
     @IBAction func loginButtonClick(_ sender: Any) {
-        let vc: UIViewController = self.storyboard!.instantiateViewController(withIdentifier: "listView")
-        vc.modalPresentationStyle = .overFullScreen
-        self.present(vc, animated: true, completion: nil)
+        postLogin()
     }
     
     /*

@@ -36,12 +36,14 @@ class ViewController: UIViewController {
     
     @IBAction func signUpButtonClick(_ sender: Any) {
         let viewController: UIViewController = self.storyboard!.instantiateViewController(withIdentifier: "signUp")
+//        self.navigationController?.pushViewController(viewController, animated: true)
         viewController.modalPresentationStyle = .overFullScreen
         self.present(viewController, animated: true, completion: nil)
     }
     
     @IBAction func loginButtonClick(_ sender: Any) {
         let viewController: UIViewController = self.storyboard!.instantiateViewController(identifier: "login")
+//        self.navigationController?.pushViewController(viewController, animated: true)
         viewController.modalPresentationStyle = .overFullScreen
         self.present(viewController, animated: true, completion: nil)
     }

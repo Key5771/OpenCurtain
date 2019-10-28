@@ -29,7 +29,7 @@ class SignUpWebmailViewController: UIViewController {
     
     func postUserEmail() {
         self.user.email = self.webmailTextfield.text ?? ""
-        
+        HTTPCookieStorage.shared.cookies?.forEach { HTTPCookieStorage.shared.deleteCookie($0) }
         NetworkRequest.shared.request(api: .authcode, method: .post, parameters: user.toJSON()) { (error) in
             if error == nil {
                 let viewController = self.storyboard?.instantiateViewController(identifier: "auth") as? SignUpAuthViewController

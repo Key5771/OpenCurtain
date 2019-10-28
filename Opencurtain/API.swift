@@ -28,6 +28,7 @@ class NetworkRequest {
         case comments = "/comments/"
         case authcode = "/authcode/"
         case authcheck = "/authcheck/"
+        case login = "/user/login/"
     }
     
     func request<T: Results>(api: API, method: Alamofire.HTTPMethod, type: T.Type, parameters: Parameters? = nil, completion handler: @escaping ([T.M]) -> Void) {
@@ -46,6 +47,7 @@ class NetworkRequest {
                 handler(nil)
             } else {
                 handler(NetworkError.http404)
+                print("StatusCode:\(response.response?.statusCode), RequestURL:\(response.request?.url), Headerr:\(response.request?.httpBody)")
             }
         }
     }
