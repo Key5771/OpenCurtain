@@ -40,7 +40,7 @@ class AddContentViewController: UIViewController, UIImagePickerControllerDelegat
         
         NetworkRequest.shared.request(api: .posts, method: .post, parameters: post.toJSON()) { (error) in
             if error == nil {
-                self.dismiss(animated: true, completion: nil)
+                self.navigationController?.popViewController(animated: true)
             } else {
                 print("\(error)")
             }

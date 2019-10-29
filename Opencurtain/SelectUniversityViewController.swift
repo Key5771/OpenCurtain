@@ -11,6 +11,7 @@ import UIKit
 class SelectUniversityViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var universityTextfield: UITextField!
+    
     let pickerView = UIPickerView()
     
     var user = User()
@@ -56,7 +57,7 @@ class SelectUniversityViewController: UIViewController, UIPickerViewDelegate, UI
     
     
     func getUniversity() {
-        NetworkRequest.shared.request(api: .universitys, method: .get, type: Universitys.self) { (results) in
+        NetworkRequest.shared.requestArray(api: .universitys, method: .get, type: University.self) { (results) in
             self.pickUniversity = results
             print(results)
         }

@@ -19,6 +19,8 @@
 		EA65F14B236560A600CA194C /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA65F14A236560A600CA194C /* SearchViewController.swift */; };
 		EA65F14D2367172B00CA194C /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA65F14C2367172B00CA194C /* SettingViewController.swift */; };
 		EA65F14F23671F9900CA194C /* ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA65F14E23671F9900CA194C /* ContentViewController.swift */; };
+		EA65F151236733AA00CA194C /* ContentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA65F150236733AA00CA194C /* ContentTableViewCell.swift */; };
+		EA65F15323680D6F00CA194C /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA65F15223680D6F00CA194C /* CommentTableViewCell.swift */; };
 		EA7BC9FD2360313C00F8EFF1 /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7BC9FC2360313C00F8EFF1 /* ListTableViewCell.swift */; };
 		EA7BCA0523604FBE00F8EFF1 /* SignupFinishViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7BCA0423604FBE00F8EFF1 /* SignupFinishViewController.swift */; };
 		EA7BCA07236059FF00F8EFF1 /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7BCA06236059FF00F8EFF1 /* SideMenuViewController.swift */; };
@@ -49,6 +51,8 @@
 		EA65F14A236560A600CA194C /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		EA65F14C2367172B00CA194C /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		EA65F14E23671F9900CA194C /* ContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewController.swift; sourceTree = "<group>"; };
+		EA65F150236733AA00CA194C /* ContentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentTableViewCell.swift; sourceTree = "<group>"; };
+		EA65F15223680D6F00CA194C /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		EA7BC9FC2360313C00F8EFF1 /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
 		EA7BCA0423604FBE00F8EFF1 /* SignupFinishViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupFinishViewController.swift; sourceTree = "<group>"; };
 		EA7BCA06236059FF00F8EFF1 /* SideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
@@ -135,6 +139,8 @@
 				EA65F14A236560A600CA194C /* SearchViewController.swift */,
 				EA65F14C2367172B00CA194C /* SettingViewController.swift */,
 				EA65F14E23671F9900CA194C /* ContentViewController.swift */,
+				EA65F150236733AA00CA194C /* ContentTableViewCell.swift */,
+				EA65F15223680D6F00CA194C /* CommentTableViewCell.swift */,
 			);
 			path = Opencurtain;
 			sourceTree = "<group>";
@@ -258,6 +264,7 @@
 				EA9A7111235F498000701244 /* LoginViewController.swift in Sources */,
 				EA9A7105235D8F7800701244 /* SignUpLoginViewController.swift in Sources */,
 				EA65F14B236560A600CA194C /* SearchViewController.swift in Sources */,
+				EA65F15323680D6F00CA194C /* CommentTableViewCell.swift in Sources */,
 				EA7BCA0923605A5300F8EFF1 /* SideMenuTableViewCell.swift in Sources */,
 				EA65F14D2367172B00CA194C /* SettingViewController.swift in Sources */,
 				EA5E0BF3235D5B640098FC82 /* SignUpAuthViewController.swift in Sources */,
@@ -273,6 +280,7 @@
 				EA9A7115235FD1A400701244 /* ListViewController.swift in Sources */,
 				EAC4CB6F2362FFD00042801B /* SelectUniversityViewController.swift in Sources */,
 				EA5E0BF5235D5C1F0098FC82 /* SignUpWebmailViewController.swift in Sources */,
+				EA65F151236733AA00CA194C /* ContentTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

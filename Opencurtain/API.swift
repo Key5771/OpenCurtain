@@ -35,12 +35,32 @@ class NetworkRequest {
     func request<T: Results>(api: API, method: Alamofire.HTTPMethod, type: T.Type, parameters: Parameters? = nil, completion handler: @escaping ([T.M]) -> Void) {
         Alamofire.request(baseURL+api.rawValue, method: method, parameters: parameters).responseObject { (response: DataResponse<T>) in
             let data = response.result.value
-            print(data)
             if let result = data?.results {
                 handler(result)
             }
         }
     }
+    
+    // api 정해져 있는 경우
+    func requestArray<T: Mappable>(api: API, method: Alamofire.HTTPMethod, type: T.Type, parameters: Parameters? = nil, completion handler: @escaping ([T]) -> Void) {
+        Alamofire.request(baseURL+api.rawValue, method: method, parameters: parameters).responseArray { (response: DataResponse<[T]>) in
+            let data = response.result.value
+            if let result = data {
+                handler(result)
+            }
+        }
+    }
+    
+    // api 동적으로 변하는 경우
+    func requestArray<T: Mappable>(api: String, method: Alamofire.HTTPMethod, type: T.Type, parameters: Parameters? = nil, completion handler: @escaping ([T]) -> Void) {
+        Alamofire.request(baseURL+api, method: method, parameters: parameters).responseArray { (response: DataResponse<[T]>) in
+            let data = response.result.value
+            if let result = data {
+                handler(result)
+            }
+        }
+    }
+    
     
     func request(api: API, method: Alamofire.HTTPMethod, parameters: Parameters? = nil, completion handler: @escaping (Error?) -> Void) {
         Alamofire.request(baseURL+api.rawValue, method: method, parameters: parameters).response { (response) in
@@ -124,7 +144,7 @@ class Subcribes: Results {
     var count: Int = 0
     var next: String = ""
     var previous: String = ""
-    var results: [Subcribe] = []
+    var results: [Subscribe] = []
     
     required init?(map: Map) {
         
@@ -138,10 +158,10 @@ class Subcribes: Results {
     }
 }
 
-class Subcribe: Mappable {
+class Subscribe: Mappable {
     var id: Int = 0
-    var user: Int = 0
-    var board: Int = 0
+    var user: String = ""
+    var board: String = ""
     
     required init?(map: Map) {
         
@@ -359,6 +379,8 @@ class Comments: Results {
 class Comment: Mappable {
     var posts: Int = 0
     var comment: String = ""
+    
+    init() { }
     
     required init?(map: Map) {
         

@@ -77,22 +77,26 @@ class SelectColleageViewController: UIViewController, UIPickerViewDataSource, UI
     
     
     func getFaculty() {
-        NetworkRequest.shared.request(api: .facultys, method: .get, type: Facultys.self) { (results) in
+        NetworkRequest.shared.requestArray(api: "/facultys/\(user.university)", method: .get, type: Faculty.self) { (results) in
             self.pickFaculty = results
         }
     }
     
     func getMajor() {
-        NetworkRequest.shared.request(api: .departments, method: .get, type: Departments.self) { (results) in
+        NetworkRequest.shared.requestArray(api: "/departments/\(user.faculty)", method: .get, type: Department.self) { (results) in
             self.pickDepartment = results
         }
     }
     
     @objc func donePicker() {
-        colleageTextfield.text = pickFaculty[pickerView1.selectedRow(inComponent: 0)].facultyName
-        majorTextfield.text = pickDepartment[pickerView2.selectedRow(inComponent: 0)].departmentName
-        colleageTextfield.resignFirstResponder()
-        majorTextfield.resignFirstResponder()
+        if colleageTextfield.isFirstResponder {
+            colleageTextfield.text = pickFaculty[pickerView1.selectedRow(inComponent: 0)].facultyName
+            colleageTextfield.resignFirstResponder()
+            getMajor()
+        } else {
+            majorTextfield.text = pickDepartment[pickerView2.selectedRow(inComponent: 0)].departmentName
+            majorTextfield.resignFirstResponder()
+        }
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
