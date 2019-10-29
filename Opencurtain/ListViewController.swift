@@ -16,11 +16,10 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var sideButton: UIBarButtonItem!
     @IBOutlet weak var listTableView: UITableView!
     
-    let baseURL = "http://opencurtain.run.goorm.io"
+//    let baseURL = "http://opencurtain.run.goorm.io"
     
     private let refreshController = UIRefreshControl()
     
-    var posts: [Posts] = []
     var post: [Post] = []
     var user: [User] = []
     
@@ -41,7 +40,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func getPosts() {
-        NetworkRequest.shared.requestArray(api: "/posts/1", method: .get, type: Post.self) { (results) in
+        NetworkRequest.shared.requestArray(url: "/posts/1", method: .get, type: Post.self) { (results) in
             self.post = results
             self.refreshController.endRefreshing()
             self.listTableView.reloadData()
@@ -61,8 +60,8 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         let cell = listTableView.dequeueReusableCell(withIdentifier: "listCell", for: indexPath) as! ListTableViewCell
         
         cell.jnuLabel.text = post[indexPath.row].title
-        cell.nameLabel.text = post[indexPath.row].user
-//        cell.nameLabel.text = "현지훈"
+//        cell.nameLabel.text = post[indexPath.row].user
+        cell.nameLabel.text = "현지훈"
         let time = post[indexPath.row].timestamp.components(separatedBy: ["-", "T", ":", "."])
         cell.timestampLabel.text = "\(time[0])년 \(time[1])월 \(time[2])일 \(time[3])시 \(time[4])분 \(time[5])초"
         cell.contentLabel.text = post[indexPath.row].content

@@ -11,6 +11,9 @@ import UIKit
 class ContentViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var contentTableView: UITableView!
+    @IBOutlet weak var bottomConstant: NSLayoutConstraint!
+    @IBOutlet var tapGestureRecognizer: UITapGestureRecognizer!
+    @IBOutlet weak var commentTextfield: UITextField!
     
     var post = Post()
     var comment = Comment()
@@ -22,6 +25,8 @@ class ContentViewController: UIViewController, UITableViewDataSource, UITableVie
         
         contentTableView.delegate = self
         contentTableView.dataSource = self
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         
     }
     
@@ -39,18 +44,13 @@ class ContentViewController: UIViewController, UITableViewDataSource, UITableVie
     }
        
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell = contentTableView.dequeueReusableCell(withIdentifier: "contentImage", for: indexPath) as! ContentTableViewCell
         
         cell.titleLabel.text = self.post.title
-        
         let time = post.timestamp.components(separatedBy: ["-", "T", ":", "."])
         cell.timeLabel.text = "\(time[0])년 \(time[1])월 \(time[2])일 \(time[3])시 \(time[4])분 \(time[5])초"
-        
         cell.nameLabel.text = self.post.user
-        
         cell.contentLabel.text = self.post.content
-        
         cell.collectionView.isHidden = true
         
         return cell
@@ -67,6 +67,27 @@ class ContentViewController: UIViewController, UITableViewDataSource, UITableVie
                 print("\(error)")
             }
         }
+    }
+    
+    @IBAction func backgroundClick(_ sender: Any) {
+        contentTableView.resignFirstResponder()
+        commentTextfield.resignFirstResponder()
+    }
+    
+    @objc func keyboardDidShow(notification: Notification) {
+        let userInfo = notification.userInfo ?? [:]
+        let keyboardFrame = (userInfo[UIResponder.keyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
+        let height = keyboardFrame.height
+        contentTableView.setContentOffset(CGPoint(x: 0, y: height/2), animated: true)
+        bottomConstant.constant -= (height - 83)
+    }
+    
+    @objc func keyboardDidHide(notification: Notification) {
+        let userInfo = notification.userInfo ?? [:]
+        let keyboardFrame = (userInfo[UIResponder.keyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
+        let height = keyboardFrame.height
+        bottomConstant.constant = 0
+        contentTableView.scrollIndicatorInsets.bottom += height
     }
     
     /*

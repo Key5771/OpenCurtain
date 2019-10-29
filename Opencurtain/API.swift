@@ -17,7 +17,8 @@ class NetworkRequest {
     
     let baseURL = "http://opencurtain.run.goorm.io"
     
-    enum API: String {
+    enum API: String{
+        
         case users = "/user/"
         case subscribes = "/subscribes/"
         case boards = "/boards/"
@@ -31,16 +32,7 @@ class NetworkRequest {
         case login = "/user/login/"
         case logout = "/user/logout"
     }
-    
-    func request<T: Results>(api: API, method: Alamofire.HTTPMethod, type: T.Type, parameters: Parameters? = nil, completion handler: @escaping ([T.M]) -> Void) {
-        Alamofire.request(baseURL+api.rawValue, method: method, parameters: parameters).responseObject { (response: DataResponse<T>) in
-            let data = response.result.value
-            if let result = data?.results {
-                handler(result)
-            }
-        }
-    }
-    
+
     // api 정해져 있는 경우
     func requestArray<T: Mappable>(api: API, method: Alamofire.HTTPMethod, type: T.Type, parameters: Parameters? = nil, completion handler: @escaping ([T]) -> Void) {
         Alamofire.request(baseURL+api.rawValue, method: method, parameters: parameters).responseArray { (response: DataResponse<[T]>) in
@@ -52,8 +44,8 @@ class NetworkRequest {
     }
     
     // api 동적으로 변하는 경우
-    func requestArray<T: Mappable>(api: String, method: Alamofire.HTTPMethod, type: T.Type, parameters: Parameters? = nil, completion handler: @escaping ([T]) -> Void) {
-        Alamofire.request(baseURL+api, method: method, parameters: parameters).responseArray { (response: DataResponse<[T]>) in
+    func requestArray<T: Mappable>(url: String, method: Alamofire.HTTPMethod, type: T.Type, parameters: Parameters? = nil, completion handler: @escaping ([T]) -> Void) {
+        Alamofire.request(baseURL+url, method: method, parameters: parameters).responseArray { (response: DataResponse<[T]>) in
             let data = response.result.value
             if let result = data {
                 handler(result)
@@ -86,31 +78,7 @@ class NetworkRequest {
     
 }
 
-protocol Results: Mappable {
-    associatedtype M: Mappable
-    
-    var count: Int { get set }
-    var next: String { get set }
-    var previous: String { get set }
-    var results: [M] { get set }
-}
 
-class Users: Results {
-    var count: Int = 0
-    var next: String = ""
-    var previous: String = ""
-    var results: [User] = []
-    
-    required init?(map: Map) {
-        
-    }
-    
-    func mapping(map: Map) {
-        count <- map["count"]
-        next <- map["next"]
-        previous <- map["previous"]
-    }
-}
 
 class User: Mappable {
     var id: Int = 0
@@ -140,23 +108,6 @@ class User: Mappable {
     }
 }
 
-class Subcribes: Results {
-    var count: Int = 0
-    var next: String = ""
-    var previous: String = ""
-    var results: [Subscribe] = []
-    
-    required init?(map: Map) {
-        
-    }
-    
-    func mapping(map: Map) {
-        count <- map["count"]
-        next <- map["next"]
-        previous <- map["previous"]
-        results <- map["results"]
-    }
-}
 
 class Subscribe: Mappable {
     var id: Int = 0
@@ -174,23 +125,6 @@ class Subscribe: Mappable {
     }
 }
 
-class Boards: Results {
-    var count: Int = 0
-    var next: String = ""
-    var previous: String = ""
-    var results: [Board] = []
-    
-    required init?(map: Map) {
-        
-    }
-    
-    func mapping(map: Map) {
-        count <- map["count"]
-        next <- map["next"]
-        previous <- map["previous"]
-        results <- map["results"]
-    }
-}
 
 class Board: Mappable {
     var url: String = ""
@@ -208,28 +142,13 @@ class Board: Mappable {
     }
 }
 
-class Universitys: Results {
-    var count: Int = 0
-    var next: String = ""
-    var previous: String = ""
-    var results: [University] = []
-    
-    required init?(map: Map) {
-        
-    }
-    
-    func mapping(map: Map) {
-        count <- map["count"]
-        next <- map["next"]
-        previous <- map["previous"]
-        results <- map["results"]
-    }
-}
 
 class University: Mappable {
     var id: Int = 0
     var universityName: String = ""
     var board: Int = 0
+    
+    init() { }
     
     required init?(map: Map) {
         
@@ -242,29 +161,14 @@ class University: Mappable {
     }
 }
 
-class Facultys: Results {
-    var count: Int = 0
-    var next: String = ""
-    var previous: String = ""
-    var results: [Faculty] = []
-    
-    required init?(map: Map) {
-        
-    }
-    
-    func mapping(map: Map) {
-        count <- map["count"]
-        next <- map["next"]
-        previous <- map["previous"]
-        results <- map["results"]
-    }
-}
 
 class Faculty: Mappable {
     var id: Int = 0
     var facultyName: String = ""
     var university: Int = 0
     var board: Int = 0
+    
+    init() { }
     
     required init?(map: Map) {
         
@@ -278,23 +182,6 @@ class Faculty: Mappable {
     }
 }
 
-class Departments: Results {
-    var count: Int = 0
-    var next: String = ""
-    var previous: String = ""
-    var results: [Department] = []
-    
-    required init?(map: Map) {
-        
-    }
-    
-    func mapping(map: Map) {
-        count <- map["count"]
-        next <- map["next"]
-        previous <- map["previous"]
-        results <- map["results"]
-    }
-}
 
 class Department: Mappable {
     var id: Int = 0
@@ -302,6 +189,8 @@ class Department: Mappable {
     var faculty: Int = 0
     var university: Int = 0
     var board: Int = 0
+    
+    init() { }
     
     required init?(map: Map) {
         
@@ -316,23 +205,6 @@ class Department: Mappable {
     }
 }
 
-class Posts: Results {
-    var count: Int = 0
-    var next: String = ""
-    var previous: String = ""
-    var results: [Post] = []
-    
-    required init?(map: Map) {
-        
-    }
-    
-    func mapping(map: Map) {
-        count <- map["count"]
-        next <- map["next"]
-        previous <- map["previous"]
-        results <- map["results"]
-    }
-}
 
 class Post: Mappable {
     var id: Int = 0
@@ -358,23 +230,6 @@ class Post: Mappable {
     }
 }
 
-class Comments: Results {
-    var count: Int = 0
-    var next: String = ""
-    var previous: String = ""
-    var results: [Comment] = []
-    
-    required init?(map: Map) {
-        
-    }
-    
-    func mapping(map: Map) {
-        count <- map["count"]
-        next <- map["next"]
-        previous <- map["previous"]
-        results <- map["results"]
-    }
-}
 
 class Comment: Mappable {
     var posts: Int = 0

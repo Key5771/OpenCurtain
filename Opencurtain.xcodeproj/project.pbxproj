@@ -21,6 +21,9 @@
 		EA65F14F23671F9900CA194C /* ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA65F14E23671F9900CA194C /* ContentViewController.swift */; };
 		EA65F151236733AA00CA194C /* ContentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA65F150236733AA00CA194C /* ContentTableViewCell.swift */; };
 		EA65F15323680D6F00CA194C /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA65F15223680D6F00CA194C /* CommentTableViewCell.swift */; };
+		EA65F1552368184000CA194C /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA65F1542368184000CA194C /* SearchTableViewCell.swift */; };
+		EA65F158236867C000CA194C /* MyContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA65F157236867C000CA194C /* MyContentViewController.swift */; };
+		EA65F15A236867EC00CA194C /* MyContentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA65F159236867EC00CA194C /* MyContentTableViewCell.swift */; };
 		EA7BC9FD2360313C00F8EFF1 /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7BC9FC2360313C00F8EFF1 /* ListTableViewCell.swift */; };
 		EA7BCA0523604FBE00F8EFF1 /* SignupFinishViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7BCA0423604FBE00F8EFF1 /* SignupFinishViewController.swift */; };
 		EA7BCA07236059FF00F8EFF1 /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7BCA06236059FF00F8EFF1 /* SideMenuViewController.swift */; };
@@ -53,6 +56,9 @@
 		EA65F14E23671F9900CA194C /* ContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewController.swift; sourceTree = "<group>"; };
 		EA65F150236733AA00CA194C /* ContentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentTableViewCell.swift; sourceTree = "<group>"; };
 		EA65F15223680D6F00CA194C /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
+		EA65F1542368184000CA194C /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
+		EA65F157236867C000CA194C /* MyContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyContentViewController.swift; sourceTree = "<group>"; };
+		EA65F159236867EC00CA194C /* MyContentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyContentTableViewCell.swift; sourceTree = "<group>"; };
 		EA7BC9FC2360313C00F8EFF1 /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
 		EA7BCA0423604FBE00F8EFF1 /* SignupFinishViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupFinishViewController.swift; sourceTree = "<group>"; };
 		EA7BCA06236059FF00F8EFF1 /* SideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
@@ -141,6 +147,9 @@
 				EA65F14E23671F9900CA194C /* ContentViewController.swift */,
 				EA65F150236733AA00CA194C /* ContentTableViewCell.swift */,
 				EA65F15223680D6F00CA194C /* CommentTableViewCell.swift */,
+				EA65F1542368184000CA194C /* SearchTableViewCell.swift */,
+				EA65F157236867C000CA194C /* MyContentViewController.swift */,
+				EA65F159236867EC00CA194C /* MyContentTableViewCell.swift */,
 			);
 			path = Opencurtain;
 			sourceTree = "<group>";
@@ -262,6 +271,7 @@
 			files = (
 				EA7BCA0523604FBE00F8EFF1 /* SignupFinishViewController.swift in Sources */,
 				EA9A7111235F498000701244 /* LoginViewController.swift in Sources */,
+				EA65F158236867C000CA194C /* MyContentViewController.swift in Sources */,
 				EA9A7105235D8F7800701244 /* SignUpLoginViewController.swift in Sources */,
 				EA65F14B236560A600CA194C /* SearchViewController.swift in Sources */,
 				EA65F15323680D6F00CA194C /* CommentTableViewCell.swift in Sources */,
@@ -270,11 +280,13 @@
 				EA5E0BF3235D5B640098FC82 /* SignUpAuthViewController.swift in Sources */,
 				EA7BCA07236059FF00F8EFF1 /* SideMenuViewController.swift in Sources */,
 				EA5E0BE3235D35DF0098FC82 /* ViewController.swift in Sources */,
+				EA65F15A236867EC00CA194C /* MyContentTableViewCell.swift in Sources */,
 				EA65F14F23671F9900CA194C /* ContentViewController.swift in Sources */,
 				EA5E0BDF235D35DF0098FC82 /* AppDelegate.swift in Sources */,
 				EA7BC9FD2360313C00F8EFF1 /* ListTableViewCell.swift in Sources */,
 				EA5E0BE1235D35DF0098FC82 /* SceneDelegate.swift in Sources */,
 				EAC4CB73236300040042801B /* SelectColleageViewController.swift in Sources */,
+				EA65F1552368184000CA194C /* SearchTableViewCell.swift in Sources */,
 				EAC4CB6D2361DCFE0042801B /* API.swift in Sources */,
 				EAC4CB752363212D0042801B /* AddContentViewController.swift in Sources */,
 				EA9A7115235FD1A400701244 /* ListViewController.swift in Sources */,
