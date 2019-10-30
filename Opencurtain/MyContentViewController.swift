@@ -12,6 +12,7 @@ class MyContentViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet weak var myTablevView: UITableView!
     
     var post: [Post] = []
+    var posts: [String:Int] = [:]
 
     override func viewWillAppear(_ animated: Bool) {
         getCurrentUserPost()
@@ -36,12 +37,11 @@ class MyContentViewController: UIViewController, UITableViewDelegate, UITableVie
         let cell = myTablevView.dequeueReusableCell(withIdentifier: "myCell", for: indexPath) as! MyContentTableViewCell
         
         cell.universityLabel.text = post[indexPath.row].title
-//        cell.nameLabel.text = post[indexPath.row].user
-        cell.nameLabel.text = "현지훈"
+        cell.nameLabel.text = post[indexPath.row].user
+//        cell.nameLabel.text = "현지훈"
         let time = post[indexPath.row].timestamp.components(separatedBy: ["-", "T", ":", "."])
         cell.timeLabel.text = "\(time[0])년 \(time[1])월 \(time[2])일 \(time[3])시 \(time[4])분 \(time[5])초"
         cell.contentLabel.text = post[indexPath.row].content
-        
         
         return cell
     }
@@ -49,6 +49,25 @@ class MyContentViewController: UIViewController, UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let postId = self.post[indexPath.row].id
+            self.posts["posts"] = postId
+            print(self.post[indexPath.row].id)
+            let deletePost = self.post.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            NetworkRequest.shared.request(url: "/posts/\(deletePost.board)/\(deletePost.id)", method: .delete) { (error) in
+                if error == nil {
+                    self.myTablevView.reloadData()
+                } else {
+                    self.post.insert(deletePost, at: indexPath.row)
+                    self.myTablevView.insertRows(at: [indexPath], with: .automatic)
+                }
+            }
+        }
+    }
+    
     
     func getCurrentUserPost() {
         NetworkRequest.shared.requestArray(url: "/user/post", method: .get, type: Post.self) { (response) in

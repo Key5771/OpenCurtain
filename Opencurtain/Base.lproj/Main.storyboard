@@ -1010,7 +1010,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="250" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9xB-i8-MMJ">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="250" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9xB-i8-MMJ">
                                 <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
@@ -1357,12 +1357,21 @@
                                                         </collectionViewCell>
                                                     </cells>
                                                 </collectionView>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8EM-sx-Jcc">
+                                                    <rect key="frame" x="0.0" y="239" width="414" height="5"/>
+                                                    <color key="backgroundColor" white="0.84469534820000003" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="5" id="3FG-Ia-Qy5"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailingMargin" secondItem="3B0-Oz-XcM" secondAttribute="trailing" constant="10" id="64v-BJ-aMw"/>
                                                 <constraint firstItem="Nyx-J3-a6H" firstAttribute="top" secondItem="x84-cU-91l" secondAttribute="bottom" constant="8" id="7z7-Ib-GRc"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="vIy-K0-btd" secondAttribute="trailing" constant="10" id="A3M-JN-fmX"/>
+                                                <constraint firstAttribute="bottom" secondItem="8EM-sx-Jcc" secondAttribute="bottom" id="Arz-1s-fsc"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="bEe-aG-KgV" secondAttribute="trailing" constant="10" id="BfK-5K-dzX"/>
+                                                <constraint firstAttribute="trailing" secondItem="8EM-sx-Jcc" secondAttribute="trailing" id="IWn-IA-AKI"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="vIy-K0-btd" secondAttribute="bottom" constant="10" id="WZM-VY-aPa"/>
                                                 <constraint firstItem="Nyx-J3-a6H" firstAttribute="leading" secondItem="mNd-fq-VLB" secondAttribute="leadingMargin" constant="55" id="Zwr-1R-zz9"/>
                                                 <constraint firstItem="bEe-aG-KgV" firstAttribute="top" secondItem="3B0-Oz-XcM" secondAttribute="bottom" constant="16" id="ezi-Vy-d2v"/>
@@ -1373,6 +1382,7 @@
                                                 <constraint firstItem="vIy-K0-btd" firstAttribute="top" secondItem="bEe-aG-KgV" secondAttribute="bottom" constant="16" id="o5W-qp-brN"/>
                                                 <constraint firstItem="3B0-Oz-XcM" firstAttribute="top" secondItem="Nyx-J3-a6H" secondAttribute="bottom" constant="16" id="qlA-X6-L1K"/>
                                                 <constraint firstItem="vIy-K0-btd" firstAttribute="leading" secondItem="mNd-fq-VLB" secondAttribute="leadingMargin" constant="10" id="u2f-MP-vbq"/>
+                                                <constraint firstItem="8EM-sx-Jcc" firstAttribute="leading" secondItem="mNd-fq-VLB" secondAttribute="leading" id="wNf-b0-eFG"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>

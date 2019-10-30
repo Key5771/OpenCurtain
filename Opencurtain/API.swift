@@ -15,7 +15,7 @@ class NetworkRequest {
     static let shared: NetworkRequest = NetworkRequest()
     private init() { }
     
-    let baseURL = "http://opencurtain.run.goorm.io"
+    let baseURL = "http://opencurtain-test.run.goorm.io"
     
     enum API: String{
         
@@ -56,6 +56,17 @@ class NetworkRequest {
     
     func request(api: API, method: Alamofire.HTTPMethod, parameters: Parameters? = nil, completion handler: @escaping (Error?) -> Void) {
         Alamofire.request(baseURL+api.rawValue, method: method, parameters: parameters).response { (response) in
+            if response.response?.statusCode == 200 {
+                handler(nil)
+            } else {
+                handler(NetworkError.http404)
+                print("StatusCode:\(response.response?.statusCode), RequestURL:\(response.request?.url), Headerr:\(response.request?.httpBody)")
+            }
+        }
+    }
+    
+    func request(url: String, method: Alamofire.HTTPMethod, parameters: Parameters? = nil, completion handler: @escaping (Error?) -> Void) {
+        Alamofire.request(baseURL+url, method: method, parameters: parameters).response { (response) in
             if response.response?.statusCode == 200 {
                 handler(nil)
             } else {
@@ -232,6 +243,8 @@ class Post: Mappable {
 
 
 class Comment: Mappable {
+    var user: String = ""
+    var timestamp: String = ""
     var posts: Int = 0
     var comment: String = ""
     
@@ -242,6 +255,8 @@ class Comment: Mappable {
     }
     
     func mapping(map: Map) {
+        user <- map["user"]
+        timestamp <- map["timestamp"]
         posts <- map["posts"]
         comment <- map["comment"]
     }

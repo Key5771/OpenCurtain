@@ -16,7 +16,7 @@ class ContentViewController: UIViewController, UITableViewDataSource, UITableVie
     @IBOutlet weak var commentTextfield: UITextField!
     
     var post = Post()
-    var comment = Comment()
+    var comments: [Comment] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,43 +30,58 @@ class ContentViewController: UIViewController, UITableViewDataSource, UITableVie
         
     }
     
-//    func numberOfSections(in tableView: UITableView) -> Int {
-//        return 2
-//    }
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        if section == 0 {
-//            return 1
-//        } else if section == 1 {
-//            return 1
-//        }
-        return 1
+        if section == 0 {
+            return 1
+        } else if section == 1 {
+            return comments.count
+        }
+        return 0
     }
        
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = contentTableView.dequeueReusableCell(withIdentifier: "contentImage", for: indexPath) as! ContentTableViewCell
         
-        cell.titleLabel.text = self.post.title
-        let time = post.timestamp.components(separatedBy: ["-", "T", ":", "."])
-        cell.timeLabel.text = "\(time[0])년 \(time[1])월 \(time[2])일 \(time[3])시 \(time[4])분 \(time[5])초"
-        cell.nameLabel.text = self.post.user
-        cell.contentLabel.text = self.post.content
-        cell.collectionView.isHidden = true
-        
-        return cell
+        if indexPath.section == 0 {
+            let cell = contentTableView.dequeueReusableCell(withIdentifier: "contentImage", for: indexPath) as! ContentTableViewCell
+            
+            cell.titleLabel.text = self.post.title
+            let time = post.timestamp.components(separatedBy: ["-", "T", ":", "."])
+            cell.timeLabel.text = "\(time[0])년 \(time[1])월 \(time[2])일 \(time[3])시 \(time[4])분 \(time[5])초"
+            cell.nameLabel.text = self.post.user
+            cell.contentLabel.text = self.post.content
+            cell.collectionView.isHidden = true
+            
+            return cell
+        } else {
+            let cell = contentTableView.dequeueReusableCell(withIdentifier: "comment", for: indexPath) as! CommentTableViewCell
+            cell.nameLabel.text = self.comments[indexPath.row].user
+            let time = comments[indexPath.row].timestamp.components(separatedBy: ["-", "T", ":", "."])
+            cell.timeLabel.text = "\(time[0])년 \(time[1])월 \(time[2])일 \(time[3])시 \(time[4])분 \(time[5])초"
+            cell.contentLabel.text = self.comments[indexPath.row].comment
+            
+            return cell
+        }
     }
     
     func postComment() {
-        self.comment.posts = self.post.board
-        self.comment.comment = ""
+        var comment: [String:String] = [:]
+        comment["comment"] = self.commentTextfield.text ?? ""
+//        self.comments.user = self.post.user
+//        self.comments.posts = self.post.board
+//        self.comments.comment = ""
         
-        NetworkRequest.shared.request(api: .comments, method: .post, parameters: comment.toJSON()) { (error) in
+        NetworkRequest.shared.request(api: .comments, method: .post, parameters: comment) { (error) in
             if error == nil {
                 self.contentTableView.reloadData()
             } else {
                 print("\(error)")
             }
         }
+        
     }
     
     @IBAction func backgroundClick(_ sender: Any) {

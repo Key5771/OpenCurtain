@@ -49,6 +49,12 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     @objc func refresh() {
         getPosts()
+        
+        
+//        // 검색 정렬 필터
+//        let word = "제주"
+//
+//        let newPosts = post.filter { $0.title.contains(word) || $0.content.contains(word) }
     }
     
     
@@ -60,8 +66,8 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         let cell = listTableView.dequeueReusableCell(withIdentifier: "listCell", for: indexPath) as! ListTableViewCell
         
         cell.jnuLabel.text = post[indexPath.row].title
-//        cell.nameLabel.text = post[indexPath.row].user
-        cell.nameLabel.text = "현지훈"
+        cell.nameLabel.text = post[indexPath.row].user
+//        cell.nameLabel.text = "현지훈"
         let time = post[indexPath.row].timestamp.components(separatedBy: ["-", "T", ":", "."])
         cell.timestampLabel.text = "\(time[0])년 \(time[1])월 \(time[2])일 \(time[3])시 \(time[4])분 \(time[5])초"
         cell.contentLabel.text = post[indexPath.row].content

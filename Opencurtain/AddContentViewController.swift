@@ -19,7 +19,6 @@ class AddContentViewController: UIViewController, UIImagePickerControllerDelegat
     
     var post = Post()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
