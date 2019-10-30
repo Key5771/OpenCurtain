@@ -15,7 +15,7 @@ class NetworkRequest {
     static let shared: NetworkRequest = NetworkRequest()
     private init() { }
     
-    let baseURL = "http://opencurtain-test.run.goorm.io"
+    let baseURL = "http://opencurtain.run.goorm.io"
     
     enum API: String{
         
@@ -96,9 +96,9 @@ class User: Mappable {
     var username: String = ""
     var email: String = ""
     var password: String = ""
-    var university: Int = 0
-    var faculty: Int = 0
-    var department: Int = 0
+    var university: String = ""
+    var faculty: String = ""
+    var department: String = ""
     var authcode: Int = 0
     
     init() { }
@@ -122,8 +122,8 @@ class User: Mappable {
 
 class Subscribe: Mappable {
     var id: Int = 0
-    var user: String = ""
-    var board: String = ""
+    var board: Int = 0
+    var boardname: String = ""
     
     required init?(map: Map) {
         
@@ -131,8 +131,8 @@ class Subscribe: Mappable {
     
     func mapping(map: Map) {
         id <- map["id"]
-        user <- map["user"]
         board <- map["board"]
+        boardname <- map["boardname"]
     }
 }
 
@@ -224,6 +224,7 @@ class Post: Mappable {
     var timestamp: String = ""
     var title: String = ""
     var content: String = ""
+    var universityname: String = ""
     
     init() { }
     
@@ -235,9 +236,10 @@ class Post: Mappable {
         id <- map["id"]
         user <- map["user"]
         board <- map["board"]
-        timestamp <- map["timestemp"]
+        timestamp <- map["timestamp"]
         title <- map["title"]
         content <- map["content"]
+        universityname <- map["universityname"]
     }
 }
 

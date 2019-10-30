@@ -78,7 +78,7 @@ class SelectUniversityViewController: UIViewController, UIPickerViewDelegate, UI
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        self.user.university = pickUniversity[row].id
+        self.user.university = String(pickUniversity[row].id)
         return pickUniversity[row].universityName
     }
     

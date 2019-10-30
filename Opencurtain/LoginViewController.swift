@@ -27,6 +27,7 @@ class LoginViewController: UIViewController {
         self.user["password"] = passwordTextfield.text ?? ""
         NetworkRequest.shared.request(api: .login, method: .post, parameters: user) { (error) in
             if error == nil {
+                self.navigationController?.popViewController(animated: false)
                 let viewController = self.storyboard?.instantiateViewController(identifier: "listView")
                 viewController?.modalPresentationStyle = .overFullScreen
                 self.present(viewController!, animated: true, completion: nil)

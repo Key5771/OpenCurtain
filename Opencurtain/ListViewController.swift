@@ -11,17 +11,22 @@ import SideMenu
 import Alamofire
 import AlamofireObjectMapper
 
-class ListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SideMenuViewControllerDelegate {
     
     @IBOutlet weak var sideButton: UIBarButtonItem!
     @IBOutlet weak var listTableView: UITableView!
-    
-//    let baseURL = "http://opencurtain.run.goorm.io"
     
     private let refreshController = UIRefreshControl()
     
     var post: [Post] = []
     var user: [User] = []
+    
+    var board: (id: Int, name: String) = (1, "전체") {
+        didSet {
+            self.getPosts()
+            self.navigationItem.title = "\(board.name) 글 보기"
+        }
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         getPosts()
@@ -40,7 +45,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func getPosts() {
-        NetworkRequest.shared.requestArray(url: "/posts/1", method: .get, type: Post.self) { (results) in
+        NetworkRequest.shared.requestArray(url: "/posts/\(self.board.id)", method: .get, type: Post.self) { (results) in
             self.post = results
             self.refreshController.endRefreshing()
             self.listTableView.reloadData()
@@ -65,7 +70,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = listTableView.dequeueReusableCell(withIdentifier: "listCell", for: indexPath) as! ListTableViewCell
         
-        cell.jnuLabel.text = post[indexPath.row].title
+        cell.jnuLabel.text = post[indexPath.row].universityname
         cell.nameLabel.text = post[indexPath.row].user
 //        cell.nameLabel.text = "현지훈"
         let time = post[indexPath.row].timestamp.components(separatedBy: ["-", "T", ":", "."])
@@ -85,6 +90,9 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     @IBAction func sideButtonClick(_ sender: Any) {
         let vc = self.storyboard!.instantiateViewController(withIdentifier: "board")
+        if let vc = vc as? SideMenuViewController {
+            vc.delegate = self
+        }
         let menu = SideMenuNavigationController(rootViewController: vc)
         menu.presentationStyle = .menuSlideIn
         menu.leftSide = true
@@ -96,14 +104,19 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
+        if segue.identifier == "writePost" {
+            if let viewController = segue.destination as? AddContentViewController {
+                viewController.boardId = self.board.id
+            }
+        }
     }
-    */
+    
 
 }

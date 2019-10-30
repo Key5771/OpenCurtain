@@ -13,6 +13,8 @@ class MyContentViewController: UIViewController, UITableViewDelegate, UITableVie
     
     var post: [Post] = []
     var posts: [String:Int] = [:]
+    
+    private let refreshController = UIRefreshControl()
 
     override func viewWillAppear(_ animated: Bool) {
         getCurrentUserPost()
@@ -27,6 +29,13 @@ class MyContentViewController: UIViewController, UITableViewDelegate, UITableVie
         myTablevView.delegate = self
         myTablevView.dataSource = self
         
+        myTablevView.refreshControl = refreshController
+        refreshController.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        
+    }
+    
+    @objc func refresh() {
+        getCurrentUserPost()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -73,6 +82,7 @@ class MyContentViewController: UIViewController, UITableViewDelegate, UITableVie
         NetworkRequest.shared.requestArray(url: "/user/post", method: .get, type: Post.self) { (response) in
             self.post = response
             self.myTablevView.reloadData()
+            self.refreshController.endRefreshing()
         }
     }
 

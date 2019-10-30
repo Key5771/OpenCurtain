@@ -114,10 +114,10 @@ class SelectColleageViewController: UIViewController, UIPickerViewDataSource, UI
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if pickerView == pickerView1 {
-            self.user.faculty = pickFaculty[row].id
+            self.user.faculty = String(pickFaculty[row].id)
             return pickFaculty[row].facultyName
         } else if pickerView == pickerView2 {
-            self.user.department = pickDepartment[row].id
+            self.user.department = String(pickDepartment[row].id)
             return pickDepartment[row].departmentName
         }
         return ""

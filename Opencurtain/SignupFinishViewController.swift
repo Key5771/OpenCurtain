@@ -18,9 +18,13 @@ class SignupFinishViewController: UIViewController {
     }
     
     @IBAction func continueButtonClick(_ sender: Any) {
+//        self.navigationController?.popToRootViewController(animated: false)
         let vc: UIViewController = self.storyboard!.instantiateViewController(withIdentifier: "loginView")
-        vc.modalPresentationStyle = .overFullScreen
-        self.present(vc, animated: true, completion: nil)
+//        vc.modalPresentationStyle = .overFullScreen
+//        self.present(vc, animated: true, completion: nil)
+        let rootVC = self.navigationController?.viewControllers.first
+        self.navigationController?.setViewControllers([rootVC!, vc], animated: true)
+//        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     /*

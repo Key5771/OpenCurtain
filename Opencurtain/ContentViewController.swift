@@ -14,9 +14,12 @@ class ContentViewController: UIViewController, UITableViewDataSource, UITableVie
     @IBOutlet weak var bottomConstant: NSLayoutConstraint!
     @IBOutlet var tapGestureRecognizer: UITapGestureRecognizer!
     @IBOutlet weak var commentTextfield: UITextField!
+    @IBOutlet weak var commentButton: UIButton!
+    
     
     var post = Post()
     var comments: [Comment] = []
+    var comment: [String:String] = [:]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,9 +28,11 @@ class ContentViewController: UIViewController, UITableViewDataSource, UITableVie
         
         contentTableView.delegate = self
         contentTableView.dataSource = self
+        
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         
+        getComment()
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -46,14 +51,14 @@ class ContentViewController: UIViewController, UITableViewDataSource, UITableVie
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.section == 0 {
-            let cell = contentTableView.dequeueReusableCell(withIdentifier: "contentImage", for: indexPath) as! ContentTableViewCell
+            let cell = contentTableView.dequeueReusableCell(withIdentifier: "content", for: indexPath) as! ContentTableViewCell
             
             cell.titleLabel.text = self.post.title
             let time = post.timestamp.components(separatedBy: ["-", "T", ":", "."])
             cell.timeLabel.text = "\(time[0])년 \(time[1])월 \(time[2])일 \(time[3])시 \(time[4])분 \(time[5])초"
             cell.nameLabel.text = self.post.user
             cell.contentLabel.text = self.post.content
-            cell.collectionView.isHidden = true
+            cell.collectionView?.isHidden = true
             
             return cell
         } else {
@@ -68,13 +73,9 @@ class ContentViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     func postComment() {
-        var comment: [String:String] = [:]
         comment["comment"] = self.commentTextfield.text ?? ""
-//        self.comments.user = self.post.user
-//        self.comments.posts = self.post.board
-//        self.comments.comment = ""
         
-        NetworkRequest.shared.request(api: .comments, method: .post, parameters: comment) { (error) in
+        NetworkRequest.shared.request(url: "/comments/\(post.id)", method: .post, parameters: comment) { (error) in
             if error == nil {
                 self.contentTableView.reloadData()
             } else {
@@ -82,6 +83,18 @@ class ContentViewController: UIViewController, UITableViewDataSource, UITableVie
             }
         }
         
+    }
+    
+    func getComment() {
+        NetworkRequest.shared.requestArray(url: "/comments/\(post.id)", method: .get, type: Comment.self) { (response) in
+            self.comments = response
+            self.contentTableView.reloadData()
+            print(self.comments.count)
+        }
+    }
+    
+    @IBAction func commentButtonClick(_ sender: Any) {
+        postComment()
     }
     
     @IBAction func backgroundClick(_ sender: Any) {
@@ -94,7 +107,7 @@ class ContentViewController: UIViewController, UITableViewDataSource, UITableVie
         let keyboardFrame = (userInfo[UIResponder.keyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
         let height = keyboardFrame.height
         contentTableView.setContentOffset(CGPoint(x: 0, y: height/2), animated: true)
-        bottomConstant.constant -= (height - 83)
+        bottomConstant.constant -= (height)
     }
     
     @objc func keyboardDidHide(notification: Notification) {

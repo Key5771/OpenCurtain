@@ -18,6 +18,7 @@ class AddContentViewController: UIViewController, UIImagePickerControllerDelegat
     let picker = UIImagePickerController()
     
     var post = Post()
+    var boardId = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +36,7 @@ class AddContentViewController: UIViewController, UIImagePickerControllerDelegat
     func postContent() {
         self.post.content = self.contentTextview.text
         self.post.title = self.titleTextfield.text ?? ""
-        self.post.board = 1
+        self.post.board = self.boardId
         
         NetworkRequest.shared.request(api: .posts, method: .post, parameters: post.toJSON()) { (error) in
             if error == nil {

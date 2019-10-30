@@ -30,48 +30,67 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         getSubscribe()
         getUniversity()
         getFaculty()
-//        getDepartment()
+        getDepartment()
         
     }
+    
+    @IBAction func segmentTap(_ sender: UISegmentedControl) {
+        searchTableview.reloadData()
+    }
+    
+    
 
-//    func numberOfSections(in tableView: UITableView) -> Int {
-//        return 3
-//    }
+    func numberOfSections(in tableView: UITableView) -> Int {
+        if segment.selectedSegmentIndex == 1 {
+            return 3
+        }
+        return 1
+    }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if segment.selectedSegmentIndex == 0 {
             cellCount = subscribe.count
         } else if segment.selectedSegmentIndex == 1 {
-            cellCount = faculty.count
-            
-//            if section == 0 {
-//                cellCount = university.count
-//            } else if section == 1 {
-//                cellCount = faculty.count
-//            } else if section == 2 {
-//                cellCount = department.count
-//            }
-//            return 0
+            if section == 0 {
+                cellCount = university.count
+            } else if section == 1 {
+                cellCount = faculty.count
+            } else if section == 2 {
+                cellCount = department.count
+            }
         }
         
         return cellCount
     }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if segment.selectedSegmentIndex == 1 {
+            if section == 0 {
+                return "학교"
+            } else if section == 1 {
+                return "학부"
+            } else if section == 2 {
+                return "학과"
+            }
+        }
+        return nil
+    }
+    
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = searchTableview.dequeueReusableCell(withIdentifier: "searchCell") as! SearchTableViewCell
         
         if segment.selectedSegmentIndex == 0 {
-            cell.label.text = self.subscribe[indexPath.row].board
+            cell.label.text = self.subscribe[indexPath.row].boardname
         } else if segment.selectedSegmentIndex == 1 {
-            cell.label.text = faculty[indexPath.row].facultyName
-//            if indexPath.section == 0 {
-//                cell.label.text = university[indexPath.row].universityName
-//            } else if indexPath.section == 1 {
-//                cell.label.text = faculty[indexPath.row].facultyName
-//            } else if indexPath.section == 2 {
-//                cell.label.text = department[indexPath.row].departmentName
-//            }
+            if indexPath.section == 0 {
+                cell.label.text = university[indexPath.row].universityName
+            } else if indexPath.section == 1 {
+                cell.label.text = faculty[indexPath.row].facultyName
+            } else if indexPath.section == 2 {
+                cell.label.text = department[indexPath.row].departmentName
+            }
         }
 
         return cell
@@ -97,7 +116,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func getFaculty() {
         NetworkRequest.shared
-            .requestArray(url: "/facultys/1", method: .get, type: Faculty.self, completion: { (response) in
+            .requestArray(api: .facultys, method: .get, type: Faculty.self, completion: { (response) in
                 self.faculty = response
                 self.searchTableview.reloadData()
             })

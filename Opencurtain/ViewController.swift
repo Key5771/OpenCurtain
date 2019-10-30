@@ -34,6 +34,7 @@ class ViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
         NetworkRequest.shared.request(api: .users, method: .get) { (error) in
             if error == nil {
                 let viewController = self.storyboard?.instantiateViewController(identifier: "listView")
@@ -45,17 +46,19 @@ class ViewController: UIViewController {
     }
     
     @IBAction func signUpButtonClick(_ sender: Any) {
-        let viewController: UIViewController = self.storyboard!.instantiateViewController(withIdentifier: "signUp")
-//        self.navigationController?.pushViewController(viewController, animated: true)
-        viewController.modalPresentationStyle = .overFullScreen
-        self.present(viewController, animated: true, completion: nil)
+        let viewController: UIViewController = self.storyboard!.instantiateViewController(withIdentifier: "signUpView")
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
+        self.navigationController?.pushViewController(viewController, animated: true)
+//        viewController.modalPresentationStyle = .overFullScreen
+//        self.present(viewController, animated: true, completion: nil)
     }
     
     @IBAction func loginButtonClick(_ sender: Any) {
-        let viewController: UIViewController = self.storyboard!.instantiateViewController(identifier: "login")
-//        self.navigationController?.pushViewController(viewController, animated: true)
-        viewController.modalPresentationStyle = .overFullScreen
-        self.present(viewController, animated: true, completion: nil)
+        let viewController: UIViewController = self.storyboard!.instantiateViewController(identifier: "loginView")
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
+        self.navigationController?.pushViewController(viewController, animated: true)
+//        viewController.modalPresentationStyle = .overFullScreen
+//        self.present(viewController, animated: true, completion: nil)
     }
     
 

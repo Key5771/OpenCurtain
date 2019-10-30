@@ -21,12 +21,22 @@ class SettingViewController: UIViewController {
     
     
     @IBAction func logoutButtonClick(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
-        NetworkRequest.shared.request(api: .logout, method: .get) { (error) in
-            if error != nil {
-                print("\(error)")
+        let alertController = UIAlertController(title: "로그아웃", message: "로그아웃 하시겠습니까?", preferredStyle: .alert)
+        
+        let okButton = UIAlertAction(title: "확인", style: .default, handler: {alertAction in
+            NetworkRequest.shared.request(api: .logout, method: .get) { (error) in
+                if error != nil {
+                    print("\(error)")
+                } else {
+                    self.dismiss(animated: true, completion: nil)
+                    self.navigationController?.popToRootViewController(animated: true)
+                }
             }
-        }
+        })
+        let cancelButton = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        alertController.addAction(cancelButton)
+        alertController.addAction(okButton)
+        self.present(alertController, animated: true, completion: nil)
     }
     
     /*

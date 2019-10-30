@@ -15,6 +15,8 @@ class SideMenuViewController: UIViewController, UITableViewDelegate, UITableView
     
     var menuArray: [Subscribe] = []
     
+    weak var delegate: SideMenuViewControllerDelegate?
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return menuArray.count
     }
@@ -22,7 +24,7 @@ class SideMenuViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "totalCell", for: indexPath) as! SideMenuTableViewCell
         
-        cell.totalLabel.text = menuArray[indexPath.row].board
+        cell.totalLabel.text = menuArray[indexPath.row].boardname
         
         return cell
     }
@@ -47,6 +49,8 @@ class SideMenuViewController: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        delegate?.board = (menuArray[indexPath.row].board, menuArray[indexPath.row].boardname)
+        self.dismiss(animated: true, completion: nil)
 //        self.navigationController?.popViewController(animated: true)
     }
     
@@ -61,4 +65,8 @@ class SideMenuViewController: UIViewController, UITableViewDelegate, UITableView
     }
     */
 
+}
+
+protocol SideMenuViewControllerDelegate: class {
+    var board: (id: Int, name: String) { get set }
 }
