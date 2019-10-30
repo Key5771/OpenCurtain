@@ -12,6 +12,7 @@ class SignUpWebmailViewController: UIViewController {
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet var tapGesture: UITapGestureRecognizer!
     @IBOutlet weak var webmailTextfield: UITextField!
+    @IBOutlet var activityIndicator: UIActivityIndicatorView!
     
     var user = User()
     
@@ -21,9 +22,11 @@ class SignUpWebmailViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         nextButton.layer.cornerRadius = 5
+        activityIndicator.isHidden = true
     }
     
     @IBAction func nextButtonClick(_ sender: Any) {
+        activityIndicator.startAnimating()
         postUserEmail()
     }
     
@@ -32,11 +35,13 @@ class SignUpWebmailViewController: UIViewController {
         HTTPCookieStorage.shared.cookies?.forEach { HTTPCookieStorage.shared.deleteCookie($0) }
         NetworkRequest.shared.request(api: .authcode, method: .post, parameters: user.toJSON()) { (error) in
             if error == nil {
+                self.activityIndicator.stopAnimating()
                 let viewController = self.storyboard?.instantiateViewController(identifier: "auth") as? SignUpAuthViewController
                 
                 viewController?.user = self.user
                 self.navigationController?.pushViewController((viewController)!, animated: true)
             } else {
+                self.activityIndicator.stopAnimating()
                 let alertController = UIAlertController(title: "이메일 오류", message: "유효하지 않거나 이미 가입된 메일입니다.", preferredStyle: .alert)
                 let okButton = UIAlertAction(title: "확인", style: .default, handler: nil)
                 alertController.addAction(okButton)

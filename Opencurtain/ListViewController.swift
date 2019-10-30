@@ -71,10 +71,11 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         let cell = listTableView.dequeueReusableCell(withIdentifier: "listCell", for: indexPath) as! ListTableViewCell
         
         cell.jnuLabel.text = post[indexPath.row].universityname
-        cell.nameLabel.text = post[indexPath.row].user
+        cell.titleLabel.text = post[indexPath.row].title
+        cell.nameLabel.text = post[indexPath.row].username
 //        cell.nameLabel.text = "현지훈"
         let time = post[indexPath.row].timestamp.components(separatedBy: ["-", "T", ":", "."])
-        cell.timestampLabel.text = "\(time[0])년 \(time[1])월 \(time[2])일 \(time[3])시 \(time[4])분 \(time[5])초"
+        cell.timestampLabel.text = "\(time[0]). \(time[1]). \(time[2]) \(time[3]): \(time[4])"
         cell.contentLabel.text = post[indexPath.row].content
         
         return cell

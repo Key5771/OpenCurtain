@@ -12,6 +12,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var emailTextfield: UITextField!
     @IBOutlet weak var passwordTextfield: UITextField!
+    @IBOutlet var activityIndicator: UIActivityIndicatorView!
     
     var user: [String:String] = [:]
     
@@ -25,19 +26,23 @@ class LoginViewController: UIViewController {
         HTTPCookieStorage.shared.cookies?.forEach { HTTPCookieStorage.shared.deleteCookie($0) }
         self.user["email"] = emailTextfield.text ?? ""
         self.user["password"] = passwordTextfield.text ?? ""
-        NetworkRequest.shared.request(api: .login, method: .post, parameters: user) { (error) in
-            if error == nil {
+        
+        NetworkRequest.shared.request(api: .login, method: .post, type: User.self, parameters: self.user) { (response) in
+            if response == nil {
+                self.activityIndicator.stopAnimating()
                 self.navigationController?.popViewController(animated: false)
                 let viewController = self.storyboard?.instantiateViewController(identifier: "listView")
                 viewController?.modalPresentationStyle = .overFullScreen
                 self.present(viewController!, animated: true, completion: nil)
+                Storage.shared.user = response!
             } else {
-                print("\(error)")
+                self.activityIndicator.stopAnimating()
             }
         }
     }
     
     @IBAction func loginButtonClick(_ sender: Any) {
+        activityIndicator.startAnimating()
         postLogin()
     }
     

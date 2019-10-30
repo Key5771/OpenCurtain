@@ -13,6 +13,7 @@ class MyContentTableViewCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var contentLabel: UILabel!
+    @IBOutlet var titleLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

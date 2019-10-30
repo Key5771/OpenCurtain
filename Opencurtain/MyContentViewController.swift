@@ -45,11 +45,12 @@ class MyContentViewController: UIViewController, UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = myTablevView.dequeueReusableCell(withIdentifier: "myCell", for: indexPath) as! MyContentTableViewCell
         
-        cell.universityLabel.text = post[indexPath.row].title
-        cell.nameLabel.text = post[indexPath.row].user
+        cell.universityLabel.text = post[indexPath.row].universityname
+        cell.titleLabel.text = post[indexPath.row].title
+        cell.nameLabel.text = post[indexPath.row].username
 //        cell.nameLabel.text = "현지훈"
         let time = post[indexPath.row].timestamp.components(separatedBy: ["-", "T", ":", "."])
-        cell.timeLabel.text = "\(time[0])년 \(time[1])월 \(time[2])일 \(time[3])시 \(time[4])분 \(time[5])초"
+        cell.timeLabel.text = "\(time[0]). \(time[1]). \(time[2]) \(time[3]): \(time[4]):"
         cell.contentLabel.text = post[indexPath.row].content
         
         return cell
@@ -57,6 +58,11 @@ class MyContentViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        let viewController = self.storyboard?.instantiateViewController(withIdentifier: "contentView") as? ContentViewController
+        
+        viewController?.post = self.post[indexPath.row]
+        self.navigationController?.pushViewController(viewController, animated: true)
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {

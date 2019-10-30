@@ -55,21 +55,48 @@ class ContentViewController: UIViewController, UITableViewDataSource, UITableVie
             
             cell.titleLabel.text = self.post.title
             let time = post.timestamp.components(separatedBy: ["-", "T", ":", "."])
-            cell.timeLabel.text = "\(time[0])년 \(time[1])월 \(time[2])일 \(time[3])시 \(time[4])분 \(time[5])초"
-            cell.nameLabel.text = self.post.user
+            cell.timeLabel.text = "\(time[0]). \(time[1]). \(time[2]). \(time[3]): \(time[4])"
+            cell.nameLabel.text = self.post.username
             cell.contentLabel.text = self.post.content
             cell.collectionView?.isHidden = true
             
             return cell
         } else {
             let cell = contentTableView.dequeueReusableCell(withIdentifier: "comment", for: indexPath) as! CommentTableViewCell
-            cell.nameLabel.text = self.comments[indexPath.row].user
+            cell.nameLabel.text = self.comments[indexPath.row].username
             let time = comments[indexPath.row].timestamp.components(separatedBy: ["-", "T", ":", "."])
-            cell.timeLabel.text = "\(time[0])년 \(time[1])월 \(time[2])일 \(time[3])시 \(time[4])분 \(time[5])초"
+            cell.timeLabel.text = "\(time[0]). \(time[1]). \(time[2]). \(time[3]): \(time[4])"
             cell.contentLabel.text = self.comments[indexPath.row].comment
             
             return cell
         }
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let commentId = self.comments[indexPath.row].id
+            let postId = self.post.id
+            
+            NetworkRequest.shared.request(url: "/comments/\(postId)/\(commentId)", method: .delete) { (error) in
+                if error == nil {
+                    tableView.deleteRows(at: [indexPath], with: .fade)
+                }
+            }
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        if indexPath.section == 1 {
+            if self.post.user == Storage.shared.user.id || self.comments[indexPath.row].user == Storage.shared.user.id {
+                return true
+            }
+        }
+        
+        return false
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     func postComment() {
@@ -95,6 +122,8 @@ class ContentViewController: UIViewController, UITableViewDataSource, UITableVie
     
     @IBAction func commentButtonClick(_ sender: Any) {
         postComment()
+        commentTextfield.text = ""
+        commentTextfield.resignFirstResponder()
     }
     
     @IBAction func backgroundClick(_ sender: Any) {
@@ -104,15 +133,18 @@ class ContentViewController: UIViewController, UITableViewDataSource, UITableVie
     
     @objc func keyboardDidShow(notification: Notification) {
         let userInfo = notification.userInfo ?? [:]
-        let keyboardFrame = (userInfo[UIResponder.keyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
-        let height = keyboardFrame.height
+        let keyboardFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        var height = keyboardFrame.height
+        if #available(iOS 11.0, *) {
+            height -= self.view.safeAreaInsets.bottom
+        }
         contentTableView.setContentOffset(CGPoint(x: 0, y: height/2), animated: true)
         bottomConstant.constant -= (height)
     }
     
     @objc func keyboardDidHide(notification: Notification) {
         let userInfo = notification.userInfo ?? [:]
-        let keyboardFrame = (userInfo[UIResponder.keyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
+        let keyboardFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
         let height = keyboardFrame.height
         bottomConstant.constant = 0
         contentTableView.scrollIndicatorInsets.bottom += height

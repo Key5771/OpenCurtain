@@ -13,6 +13,7 @@ class ListTableViewCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var timestampLabel: UILabel!
     @IBOutlet weak var contentLabel: UILabel!
+    @IBOutlet var titleLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

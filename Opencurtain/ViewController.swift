@@ -35,7 +35,7 @@ class ViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
-        NetworkRequest.shared.request(api: .users, method: .get) { (error) in
+        Storage.shared.checkUser { (error) in
             if error == nil {
                 let viewController = self.storyboard?.instantiateViewController(identifier: "listView")
                 

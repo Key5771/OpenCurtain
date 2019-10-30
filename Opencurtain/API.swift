@@ -65,6 +65,13 @@ class NetworkRequest {
         }
     }
     
+    func request<T: Mappable>(api: API, method: Alamofire.HTTPMethod, type: T.Type, parameters: Parameters? = nil, completion handler: @escaping (T?) -> Void) {
+        Alamofire.request(baseURL+api.rawValue, method: method, parameters: parameters).responseObject { (response: DataResponse<T>) in
+            let data = response.result.value
+                handler(data)
+        }
+    }
+    
     func request(url: String, method: Alamofire.HTTPMethod, parameters: Parameters? = nil, completion handler: @escaping (Error?) -> Void) {
         Alamofire.request(baseURL+url, method: method, parameters: parameters).response { (response) in
             if response.response?.statusCode == 200 {
@@ -120,7 +127,7 @@ class User: Mappable {
 }
 
 
-class Subscribe: Mappable {
+class Subscribe: Mappable, Equatable {
     var id: Int = 0
     var board: Int = 0
     var boardname: String = ""
@@ -133,6 +140,10 @@ class Subscribe: Mappable {
         id <- map["id"]
         board <- map["board"]
         boardname <- map["boardname"]
+    }
+    
+    static func == (lhs: Subscribe, rhs: Subscribe) -> Bool {
+        return lhs.board == rhs.board
     }
 }
 
@@ -219,7 +230,8 @@ class Department: Mappable {
 
 class Post: Mappable {
     var id: Int = 0
-    var user: String = ""
+    var user: Int = 0
+    var username: String = ""
     var board: Int = 0
     var timestamp: String = ""
     var title: String = ""
@@ -235,6 +247,7 @@ class Post: Mappable {
     func mapping(map: Map) {
         id <- map["id"]
         user <- map["user"]
+        username <- map["username"]
         board <- map["board"]
         timestamp <- map["timestamp"]
         title <- map["title"]
@@ -245,7 +258,9 @@ class Post: Mappable {
 
 
 class Comment: Mappable {
-    var user: String = ""
+    var id: Int = 0
+    var user: Int = 0
+    var username: String = ""
     var timestamp: String = ""
     var posts: Int = 0
     var comment: String = ""
@@ -257,7 +272,9 @@ class Comment: Mappable {
     }
     
     func mapping(map: Map) {
+        id <- map["id"]
         user <- map["user"]
+        username <- map["username"]
         timestamp <- map["timestamp"]
         posts <- map["posts"]
         comment <- map["comment"]

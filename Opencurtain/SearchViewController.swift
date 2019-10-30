@@ -16,7 +16,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var university: [University] = []
     var faculty: [Faculty] = []
     var department: [Department] = []
-    var subscribe: [Subscribe] = []
+    var addSubscribe: [String:Int] = [:]
     
     var cellCount = 0
     
@@ -27,7 +27,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         searchTableview.dataSource = self
 
         // Do any additional setup after loading the view.
-        getSubscribe()
+        Storage.shared.getSubscribe { }
         getUniversity()
         getFaculty()
         getDepartment()
@@ -50,7 +50,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if segment.selectedSegmentIndex == 0 {
-            cellCount = subscribe.count
+            cellCount = Storage.shared.subscribes.count
         } else if segment.selectedSegmentIndex == 1 {
             if section == 0 {
                 cellCount = university.count
@@ -82,14 +82,34 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let cell = searchTableview.dequeueReusableCell(withIdentifier: "searchCell") as! SearchTableViewCell
         
         if segment.selectedSegmentIndex == 0 {
-            cell.label.text = self.subscribe[indexPath.row].boardname
+            cell.label.text = Storage.shared.subscribes[indexPath.row].boardname
+            cell.subscribeLabel.isHidden = true
         } else if segment.selectedSegmentIndex == 1 {
+            let boards = Storage.shared.subscribes.map { (subscribe) -> Int in
+                return subscribe.board
+            }
+            
             if indexPath.section == 0 {
                 cell.label.text = university[indexPath.row].universityName
+                if boards.contains(university[indexPath.row].board) {
+                    cell.subscribeLabel.isHidden = false
+                } else {
+                    cell.subscribeLabel.isHidden = true
+                }
             } else if indexPath.section == 1 {
                 cell.label.text = faculty[indexPath.row].facultyName
+                if boards.contains(self.faculty[indexPath.row].board) {
+                    cell.subscribeLabel.isHidden = false
+                } else {
+                    cell.subscribeLabel.isHidden = true
+                }
             } else if indexPath.section == 2 {
                 cell.label.text = department[indexPath.row].departmentName
+                if boards.contains(self.department[indexPath.row].board) {
+                    cell.subscribeLabel.isHidden = false
+                } else {
+                    cell.subscribeLabel.isHidden = true
+                }
             }
         }
 
@@ -98,12 +118,58 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         searchTableview.deselectRow(at: indexPath, animated: true)
+        if segment.selectedSegmentIndex == 1 {
+            if indexPath.section == 0 {
+                addSubscribe["board"] = self.university[indexPath.row].board
+            } else if indexPath.section == 1 {
+                addSubscribe["board"] = self.faculty[indexPath.row].board
+            } else if indexPath.section == 2 {
+                addSubscribe["board"] = self.department[indexPath.row].board
+            }
+            
+            let alertController = UIAlertController(title: "구독", message: "구독하시겠습니까?", preferredStyle: .alert)
+            
+            let cancelButton = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+            let okButton = UIAlertAction(title: "확인", style: .default) { alertAction in
+                NetworkRequest.shared.request(api: .subscribes, method: .post, parameters: self.addSubscribe) { (error) in
+                    if error == nil {
+                        Storage.shared.getSubscribe {
+                            self.searchTableview.reloadData()
+                        }
+                    } else {
+                        let alert = UIAlertController(title: "구독실패", message: "구독에 실패하였습니다.", preferredStyle: .alert)
+                        let ok = UIAlertAction(title: "확인", style: .default, handler: nil)
+                        alert.addAction(ok)
+                        self.present(alert, animated: true, completion: nil)
+                    }
+                }
+            }
+            
+            alertController.addAction(cancelButton)
+            alertController.addAction(okButton)
+            self.present(alertController, animated: true, completion: nil)
+        }
     }
     
-    func getSubscribe() {
-        NetworkRequest.shared.requestArray(api: .subscribes, method: .get, type: Subscribe.self) { (response) in
-            self.subscribe = response
-            self.searchTableview.reloadData()
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        if segment.selectedSegmentIndex == 0 && indexPath.row == 0 {
+            return false
+        }
+        
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if segment.selectedSegmentIndex == 0 {
+            if editingStyle == .delete {
+                let subscribeId = Storage.shared.subscribes[indexPath.row].id
+    //            let deleteSubscribe = Storage.shared.subscribes.remove(at: indexPath.row)
+                Storage.shared.deleteSubscribe(subscribeId: subscribeId) { (error) in
+                    if error == nil {
+                        self.searchTableview.deleteRows(at: [indexPath], with: .automatic)
+                    }
+                }
+            }
         }
     }
     
