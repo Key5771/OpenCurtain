@@ -72,7 +72,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.nameLabel.text = post[indexPath.row].username
 //        cell.nameLabel.text = "현지훈"
         let time = post[indexPath.row].timestamp.components(separatedBy: ["-", "T", ":", "."])
-        cell.timestampLabel.text = "\(time[0]). \(time[1]). \(time[2])    \(time[3]): \(time[4])"
+        cell.timestampLabel.text = "\(time[0]).\(time[1]).\(time[2]) \(time[3]):\(time[4])"
         cell.contentLabel.text = post[indexPath.row].content
         cell.commentCountLabel.text = count
         

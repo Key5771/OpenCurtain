@@ -14,6 +14,7 @@ class AddContentViewController: UIViewController, UIImagePickerControllerDelegat
     @IBOutlet weak var cameraButton: UIButton!
     @IBOutlet weak var titleTextfield: UITextField!
     @IBOutlet weak var saveButton: UIBarButtonItem!
+    @IBOutlet weak var bottomConstant: NSLayoutConstraint!
     
     let picker = UIImagePickerController()
     
@@ -31,6 +32,27 @@ class AddContentViewController: UIViewController, UIImagePickerControllerDelegat
         contentTextview.layer.borderColor = UIColor.lightGray.cgColor
         contentTextview.layer.cornerRadius = 5
         contentTextview.delegate = self
+        
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc func keyboardDidShow(notification: Notification) {
+        let userInfo = notification.userInfo ?? [:]
+        let keyboardFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        var height = keyboardFrame.height
+        if #available(iOS 11.0, *) {
+            height -= self.view.safeAreaInsets.bottom
+        }
+        bottomConstant.constant = height + 8
+    }
+    
+    @objc func keyboardDidHide(notification: Notification) {
+        let userInfo = notification.userInfo ?? [:]
+        let keyboardFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        let height = keyboardFrame.height
+        bottomConstant.constant = 8
     }
     
     func postContent() {

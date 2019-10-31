@@ -57,7 +57,7 @@ class ContentViewController: UIViewController, UITableViewDataSource, UITableVie
             
             cell.titleLabel.text = self.post.title
             let time = post.timestamp.components(separatedBy: ["-", "T", ":", "."])
-            cell.timeLabel.text = "\(time[0]). \(time[1]). \(time[2])    \(time[3]): \(time[4])"
+            cell.timeLabel.text = "\(time[0]).\(time[1]).\(time[2]) \(time[3]):\(time[4])"
             cell.nameLabel.text = self.post.username
             cell.contentLabel.text = self.post.content
             cell.collectionView?.isHidden = true
@@ -68,7 +68,7 @@ class ContentViewController: UIViewController, UITableViewDataSource, UITableVie
             let cell = contentTableView.dequeueReusableCell(withIdentifier: "comment", for: indexPath) as! CommentTableViewCell
             cell.nameLabel.text = self.comments[indexPath.row].username
             let time = comments[indexPath.row].timestamp.components(separatedBy: ["-", "T", ":", "."])
-            cell.timeLabel.text = "\(time[0]). \(time[1]). \(time[2])    \(time[3]): \(time[4])"
+            cell.timeLabel.text = "\(time[0]).\(time[1]).\(time[2]) \(time[3]):\(time[4])"
             cell.contentLabel.text = self.comments[indexPath.row].comment
             
             return cell
