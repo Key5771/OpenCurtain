@@ -55,11 +55,6 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     @objc func refresh() {
         getPosts()
         
-        
-//        // 검색 정렬 필터
-//        let word = "제주"
-//
-//        let newPosts = post.filter { $0.title.contains(word) || $0.content.contains(word) }
     }
     
     
@@ -70,13 +65,16 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = listTableView.dequeueReusableCell(withIdentifier: "listCell", for: indexPath) as! ListTableViewCell
         
-        cell.jnuLabel.text = post[indexPath.row].universityname
+        let count: String = "댓글 수 \(post[indexPath.row].commentcount)"
+        
+        cell.jnuLabel.text = post[indexPath.row].boardname
         cell.titleLabel.text = post[indexPath.row].title
         cell.nameLabel.text = post[indexPath.row].username
 //        cell.nameLabel.text = "현지훈"
         let time = post[indexPath.row].timestamp.components(separatedBy: ["-", "T", ":", "."])
-        cell.timestampLabel.text = "\(time[0]). \(time[1]). \(time[2]) \(time[3]): \(time[4])"
+        cell.timestampLabel.text = "\(time[0]). \(time[1]). \(time[2])    \(time[3]): \(time[4])"
         cell.contentLabel.text = post[indexPath.row].content
+        cell.commentCountLabel.text = count
         
         return cell
     }
@@ -87,6 +85,10 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         viewController?.post = self.post[indexPath.row]
         self.navigationController?.pushViewController(viewController!, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return CGFloat.leastNormalMagnitude
     }
     
     @IBAction func sideButtonClick(_ sender: Any) {

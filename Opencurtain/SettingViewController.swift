@@ -23,7 +23,7 @@ class SettingViewController: UIViewController {
     @IBAction func logoutButtonClick(_ sender: Any) {
         let alertController = UIAlertController(title: "로그아웃", message: "로그아웃 하시겠습니까?", preferredStyle: .alert)
         
-        let okButton = UIAlertAction(title: "확인", style: .default, handler: {alertAction in
+        let okButton = UIAlertAction(title: "확인", style: .default, handler: { alertAction in
             NetworkRequest.shared.request(api: .logout, method: .get) { (error) in
                 if error != nil {
                     print("\(error)")

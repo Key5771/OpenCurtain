@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var segment: UISegmentedControl!
     @IBOutlet weak var searchTableview: UITableView!
@@ -18,6 +18,10 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var department: [Department] = []
     var addSubscribe: [String:Int] = [:]
     
+    var newUniversity: [University] = []
+    var newFaculty: [Faculty] = []
+    var newDepartment: [Department] = []
+    
     var cellCount = 0
     
     override func viewDidLoad() {
@@ -25,6 +29,8 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         searchTableview.delegate = self
         searchTableview.dataSource = self
+        
+        searchBar.delegate = self
 
         // Do any additional setup after loading the view.
         Storage.shared.getSubscribe { }
@@ -38,7 +44,27 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         searchTableview.reloadData()
     }
     
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText != "" {
+            search()
+        }
+        
+        self.searchTableview.reloadData()
+    }
     
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        self.view.endEditing(true)
+        self.searchBar.endEditing(true)
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        self.view.endEditing(true)
+        self.searchBar.endEditing(true)
+    }
+    
+    func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
+        self.view.endEditing(true)
+    }
 
     func numberOfSections(in tableView: UITableView) -> Int {
         if segment.selectedSegmentIndex == 1 {
@@ -53,11 +79,23 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             cellCount = Storage.shared.subscribes.count
         } else if segment.selectedSegmentIndex == 1 {
             if section == 0 {
-                cellCount = university.count
+                if searchBar.text == "" {
+                    cellCount = university.count
+                } else {
+                    cellCount = newUniversity.count
+                }
             } else if section == 1 {
-                cellCount = faculty.count
+                if searchBar.text == "" {
+                    cellCount = faculty.count
+                } else {
+                    cellCount = newFaculty.count
+                }
             } else if section == 2 {
-                cellCount = department.count
+                if searchBar.text == "" {
+                    cellCount = department.count
+                } else {
+                    cellCount = newDepartment.count
+                }
             }
         }
         
@@ -90,26 +128,56 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             }
             
             if indexPath.section == 0 {
-                cell.label.text = university[indexPath.row].universityName
-                if boards.contains(university[indexPath.row].board) {
-                    cell.subscribeLabel.isHidden = false
+                if searchBar.text == "" {
+                    cell.label.text = university[indexPath.row].boardName
+                    if boards.contains(university[indexPath.row].board) {
+                        cell.subscribeLabel.isHidden = false
+                    } else {
+                        cell.subscribeLabel.isHidden = true
+                    }
                 } else {
-                    cell.subscribeLabel.isHidden = true
+                    cell.label.text = newUniversity[indexPath.row].boardName
+                    if boards.contains(newUniversity[indexPath.row].board) {
+                        cell.subscribeLabel.isHidden = false
+                    } else {
+                        cell.subscribeLabel.isHidden = true
+                    }
                 }
+                
             } else if indexPath.section == 1 {
-                cell.label.text = faculty[indexPath.row].facultyName
-                if boards.contains(self.faculty[indexPath.row].board) {
-                    cell.subscribeLabel.isHidden = false
+                if searchBar.text == "" {
+                    cell.label.text = faculty[indexPath.row].boardName
+                    if boards.contains(self.faculty[indexPath.row].board) {
+                        cell.subscribeLabel.isHidden = false
+                    } else {
+                        cell.subscribeLabel.isHidden = true
+                    }
                 } else {
-                    cell.subscribeLabel.isHidden = true
+                    cell.label.text = newFaculty[indexPath.row].boardName
+                    if boards.contains(self.newFaculty[indexPath.row].board) {
+                        cell.subscribeLabel.isHidden = false
+                    } else {
+                        cell.subscribeLabel.isHidden = true
+                    }
                 }
+                
             } else if indexPath.section == 2 {
-                cell.label.text = department[indexPath.row].departmentName
-                if boards.contains(self.department[indexPath.row].board) {
-                    cell.subscribeLabel.isHidden = false
+                if searchBar.text == "" {
+                    cell.label.text = department[indexPath.row].boardName
+                    if boards.contains(self.department[indexPath.row].board) {
+                        cell.subscribeLabel.isHidden = false
+                    } else {
+                        cell.subscribeLabel.isHidden = true
+                    }
                 } else {
-                    cell.subscribeLabel.isHidden = true
+                    cell.label.text = newDepartment[indexPath.row].boardName
+                    if boards.contains(self.newDepartment[indexPath.row].board) {
+                        cell.subscribeLabel.isHidden = false
+                    } else {
+                        cell.subscribeLabel.isHidden = true
+                    }
                 }
+                
             }
         }
 
@@ -118,16 +186,35 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         searchTableview.deselectRow(at: indexPath, animated: true)
+        var boardName: String = ""
+        
         if segment.selectedSegmentIndex == 1 {
-            if indexPath.section == 0 {
-                addSubscribe["board"] = self.university[indexPath.row].board
-            } else if indexPath.section == 1 {
-                addSubscribe["board"] = self.faculty[indexPath.row].board
-            } else if indexPath.section == 2 {
-                addSubscribe["board"] = self.department[indexPath.row].board
+            if searchBar.text == "" {
+                if indexPath.section == 0 {
+                    addSubscribe["board"] = self.university[indexPath.row].board
+                    boardName = self.university[indexPath.row].boardName
+                } else if indexPath.section == 1 {
+                    addSubscribe["board"] = self.faculty[indexPath.row].board
+                    boardName = self.faculty[indexPath.row].boardName
+                } else if indexPath.section == 2 {
+                    addSubscribe["board"] = self.department[indexPath.row].board
+                    boardName = self.department[indexPath.row].boardName
+                }
+            } else {
+                if indexPath.section == 0 {
+                    addSubscribe["board"] = self.newUniversity[indexPath.row].board
+                    boardName = self.newUniversity[indexPath.row].boardName
+                } else if indexPath.section == 1 {
+                    addSubscribe["board"] = self.newFaculty[indexPath.row].board
+                    boardName = self.newFaculty[indexPath.row].boardName
+                } else if indexPath.section == 2 {
+                    addSubscribe["board"] = self.newDepartment[indexPath.row].board
+                    boardName = self.newDepartment[indexPath.row].boardName
+                }
             }
             
-            let alertController = UIAlertController(title: "구독", message: "구독하시겠습니까?", preferredStyle: .alert)
+            
+            let alertController = UIAlertController(title: "구독", message: "\(boardName) \n \n 구독하시겠습니까?", preferredStyle: .alert)
             
             let cancelButton = UIAlertAction(title: "취소", style: .cancel, handler: nil)
             let okButton = UIAlertAction(title: "확인", style: .default) { alertAction in
@@ -173,6 +260,17 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
     
+    func search() {
+        // 검색 정렬 필터
+        let word = self.searchBar.text ?? ""
+        
+        newUniversity = university.filter { $0.universityName.contains(word) }
+        newFaculty = faculty.filter { $0.facultyName.contains(word) }
+        newDepartment = department.filter { $0.departmentName.contains(word) }
+
+//        let newPosts = post.filter { $0.title.contains(word) || $0.content.contains(word) }
+    }
+    
     func getUniversity() {
         NetworkRequest.shared.requestArray(api: .universitys, method: .get, type: University.self) { (response) in
             self.university = response
@@ -193,10 +291,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             self.department = response
             self.searchTableview.reloadData()
         }
-    }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.view.endEditing(true)
     }
     
 

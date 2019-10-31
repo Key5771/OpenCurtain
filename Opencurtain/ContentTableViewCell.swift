@@ -14,6 +14,7 @@ class ContentTableViewCell: UITableViewCell {
     @IBOutlet weak var contentLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView?
+    @IBOutlet var commentCountLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

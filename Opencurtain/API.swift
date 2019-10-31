@@ -72,6 +72,13 @@ class NetworkRequest {
         }
     }
     
+    func request<T: Mappable>(url: String, method: Alamofire.HTTPMethod, type: T.Type, parameters: Parameters? = nil, completion handler: @escaping (T?) -> Void) {
+        Alamofire.request(baseURL+url, method: method, parameters: parameters).responseObject { (response: DataResponse<T>) in
+            let data = response.result.value
+                handler(data)
+        }
+    }
+    
     func request(url: String, method: Alamofire.HTTPMethod, parameters: Parameters? = nil, completion handler: @escaping (Error?) -> Void) {
         Alamofire.request(baseURL+url, method: method, parameters: parameters).response { (response) in
             if response.response?.statusCode == 200 {
@@ -169,6 +176,7 @@ class University: Mappable {
     var id: Int = 0
     var universityName: String = ""
     var board: Int = 0
+    var boardName: String = ""
     
     init() { }
     
@@ -180,6 +188,7 @@ class University: Mappable {
         id <- map["id"]
         universityName <- map["universityname"]
         board <- map["board"]
+        boardName <- map["boardname"]
     }
 }
 
@@ -189,6 +198,7 @@ class Faculty: Mappable {
     var facultyName: String = ""
     var university: Int = 0
     var board: Int = 0
+    var boardName: String = ""
     
     init() { }
     
@@ -201,6 +211,7 @@ class Faculty: Mappable {
         facultyName <- map["facultyname"]
         university <- map["university"]
         board <- map["board"]
+        boardName <- map["boardname"]
     }
 }
 
@@ -211,6 +222,7 @@ class Department: Mappable {
     var faculty: Int = 0
     var university: Int = 0
     var board: Int = 0
+    var boardName: String = ""
     
     init() { }
     
@@ -224,6 +236,7 @@ class Department: Mappable {
         faculty <- map["faculty"]
         university <- map["university"]
         board <- map["board"]
+        boardName <- map["boardname"]
     }
 }
 
@@ -237,6 +250,8 @@ class Post: Mappable {
     var title: String = ""
     var content: String = ""
     var universityname: String = ""
+    var commentcount: Int = 0
+    var boardname: String = ""
     
     init() { }
     
@@ -253,6 +268,8 @@ class Post: Mappable {
         title <- map["title"]
         content <- map["content"]
         universityname <- map["universityname"]
+        commentcount <- map["commentcount"]
+        boardname <- map["boardname"]
     }
 }
 

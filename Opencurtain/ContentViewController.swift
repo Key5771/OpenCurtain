@@ -53,19 +53,22 @@ class ContentViewController: UIViewController, UITableViewDataSource, UITableVie
         if indexPath.section == 0 {
             let cell = contentTableView.dequeueReusableCell(withIdentifier: "content", for: indexPath) as! ContentTableViewCell
             
+            let count: String = "댓글 수 \(post.commentcount)"
+            
             cell.titleLabel.text = self.post.title
             let time = post.timestamp.components(separatedBy: ["-", "T", ":", "."])
-            cell.timeLabel.text = "\(time[0]). \(time[1]). \(time[2]). \(time[3]): \(time[4])"
+            cell.timeLabel.text = "\(time[0]). \(time[1]). \(time[2])    \(time[3]): \(time[4])"
             cell.nameLabel.text = self.post.username
             cell.contentLabel.text = self.post.content
             cell.collectionView?.isHidden = true
+            cell.commentCountLabel.text = count
             
             return cell
         } else {
             let cell = contentTableView.dequeueReusableCell(withIdentifier: "comment", for: indexPath) as! CommentTableViewCell
             cell.nameLabel.text = self.comments[indexPath.row].username
             let time = comments[indexPath.row].timestamp.components(separatedBy: ["-", "T", ":", "."])
-            cell.timeLabel.text = "\(time[0]). \(time[1]). \(time[2]). \(time[3]): \(time[4])"
+            cell.timeLabel.text = "\(time[0]). \(time[1]). \(time[2])    \(time[3]): \(time[4])"
             cell.contentLabel.text = self.comments[indexPath.row].comment
             
             return cell
@@ -79,6 +82,7 @@ class ContentViewController: UIViewController, UITableViewDataSource, UITableVie
             
             NetworkRequest.shared.request(url: "/comments/\(postId)/\(commentId)", method: .delete) { (error) in
                 if error == nil {
+                    self.comments.remove(at: indexPath.row)
                     tableView.deleteRows(at: [indexPath], with: .fade)
                 }
             }
@@ -99,16 +103,34 @@ class ContentViewController: UIViewController, UITableViewDataSource, UITableVie
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return CGFloat.leastNormalMagnitude
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if section == 0 {
+            return 10
+        }
+        return CGFloat.leastNormalMagnitude
+    }
+    
     func postComment() {
         comment["comment"] = self.commentTextfield.text ?? ""
         
-        NetworkRequest.shared.request(url: "/comments/\(post.id)", method: .post, parameters: comment) { (error) in
-            if error == nil {
-                self.contentTableView.reloadData()
-            } else {
-                print("\(error)")
+        NetworkRequest.shared.request(url: "/comments/\(post.id)", method: .post, type: Comment.self, parameters: comment) { (comment) in
+            if let comment = comment {
+                self.comments.append(comment)
+                self.contentTableView.insertRows(at: [IndexPath(row: self.comments.count-1, section: 1)], with: .automatic)
             }
         }
+        
+//        NetworkRequest.shared.request(url: "/comments/\(post.id)", method: .post, parameters: comment) { (error) in
+//            if error == nil {
+//
+//            } else {
+//                print("\(error)")
+//            }
+//        }
         
     }
     

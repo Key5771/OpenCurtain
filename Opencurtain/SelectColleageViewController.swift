@@ -79,12 +79,14 @@ class SelectColleageViewController: UIViewController, UIPickerViewDataSource, UI
     func getFaculty() {
         NetworkRequest.shared.requestArray(url: "/facultys/\(user.university)", method: .get, type: Faculty.self) { (results) in
             self.pickFaculty = results
+            self.pickerView1.reloadAllComponents()
         }
     }
     
     func getMajor() {
         NetworkRequest.shared.requestArray(url: "/departments/\(user.faculty)", method: .get, type: Department.self) { (results) in
             self.pickDepartment = results
+            self.pickerView2.reloadAllComponents()
         }
     }
     

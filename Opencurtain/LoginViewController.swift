@@ -28,12 +28,12 @@ class LoginViewController: UIViewController {
         self.user["password"] = passwordTextfield.text ?? ""
         
         NetworkRequest.shared.request(api: .login, method: .post, type: User.self, parameters: self.user) { (response) in
-            if response == nil {
+            if response != nil {
                 self.activityIndicator.stopAnimating()
                 self.navigationController?.popViewController(animated: false)
-                let viewController = self.storyboard?.instantiateViewController(identifier: "listView")
-                viewController?.modalPresentationStyle = .overFullScreen
-                self.present(viewController!, animated: true, completion: nil)
+//                let viewController = self.storyboard?.instantiateViewController(identifier: "listView")
+//                viewController?.modalPresentationStyle = .overFullScreen
+//                self.present(viewController!, animated: true, completion: nil)
                 Storage.shared.user = response!
             } else {
                 self.activityIndicator.stopAnimating()
